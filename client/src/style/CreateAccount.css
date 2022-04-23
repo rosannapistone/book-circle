@@ -1,0 +1,51 @@
+.CreateNewAccountBox{
+    padding-top: 30px;
+   margin: auto;
+
+}
+
+
+.CreateNewAccountPlaceHolder{
+margin: auto;
+display: flex;
+flex-direction: column;
+align-content: flex-start;
+text-align: left;
+align-content: flex-start;
+justify-content: left;
+max-width: 800px;
+}
+
+.CreateNewAccountPlaceHolder input{
+   margin-top: 5px;
+   align-self: left;
+   border:none;
+   padding:0.7rem;
+   border-radius: 5px;
+   background-color: #EDE8EA ;
+}
+
+.CreateNewAccountInputHolder{
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.CreateAccountButtonPlaceHolder{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-right: 10px;
+    
+}
+
+.CreateAccountButtonPlaceHolder button{
+   max-width: 190px;
+   padding: 15px;
+   background-color: #87204D;
+   border:none;
+   border-radius: 2px;
+   color:white
+}
+

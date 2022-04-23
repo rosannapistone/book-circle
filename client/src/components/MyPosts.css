@@ -1,0 +1,53 @@
+.container {
+  height: 100vh;
+}
+
+.heading {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 3rem;
+}
+
+.heading div {
+  width: 20%;
+}
+
+.myPosts {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+.edit {
+  margin: 1rem;
+  color: #87204d;
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.postContainer {
+  background-color: #ede8ea;
+  border-radius: 0.4rem;
+}
+
+.textContainer {
+  height: 20rem;
+  width: 20rem;
+  margin: 1rem;
+  overflow: hidden;
+  overflow-y: scroll;
+  text-align: left;
+}
+
+.title {
+  font-size: larger;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  color: #87204d;
+}
