@@ -1,0 +1,44 @@
+//GET all books 
+GET http://localhost:3001
+
+###
+
+// GET my own posts 
+GET http://localhost:3001/books/getownbooks
+
+###
+
+// GET one specific post 
+GET http://localhost:3001/books/id
+
+###
+
+// Create a post 
+POST http://localhost:3001/books/add 
+Content-Type: application/json
+
+{
+"title": "Nalle Puh", 
+"author": "Disney",
+"description": "About a mermaid",
+"review": "Very good"
+}
+
+###
+
+// UPDATE a specific post 
+PUT http://localhost:3001/books/62669a652e7cb5b51bebc63c
+Content-Type: application/json
+
+{
+"title": "Pippi", 
+"author": "Astrid",
+"description": "Start tjej",
+"review": "Ball"
+}
+
+###
+
+// DELETE a specific post 
+DELETE http://localhost:3001/books/62669a652e7cb5b51bebc63c
+Content-Type: application/json
