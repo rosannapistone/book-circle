@@ -1,5 +1,5 @@
 import React from "react";
-import "../style/Login.css"
+import "../style/Login.css";
 
 function Login() {
   return (
@@ -26,21 +26,23 @@ function Login() {
 
           <div className="loginPlaceHolder">
             <h2>Login or Continue Offline</h2>
-            <form>
+            <form method="POST" action="/post-feedback">
               <div className="InputHolder">
                 <label for="userName">Username</label>
-                <input name="userName"></input>
+                <input name="userName" required></input>
               </div>
               <div className="InputHolder">
                 <label for="passWord">Password</label>
-                <input name="passWord"></input>
+                <input name="passWord" required></input>
               </div>
               <div className="logInButtonPlaceHolder">
                 <p>
                   Forgot Login details?
                   <p style={{ color: "red" }}>click here</p>
                 </p>
-                <button>Log in</button>
+                <button type="submit" value="Submit">
+                  Log in
+                </button>
               </div>
             </form>
           </div>
