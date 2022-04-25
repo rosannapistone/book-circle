@@ -1,0 +1,27 @@
+GET http://localhost:5500
+
+###
+
+POST http://localhost:5500
+Content-Type: application/json
+
+{
+    "username": "hedda",
+    "password": "abcwoff",
+    "isStudent": false
+}
+
+###
+
+PUT http://localhost:5500/62614b41fde31646a7217bed
+Content-Type: application/json
+
+{
+    "username": "elin",
+    "password": "abc",
+    "isStudent": true
+}
+
+###
+
+DELETE http://localhost:3001/62614a84599cc910d4a6efa3
