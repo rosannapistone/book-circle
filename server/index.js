@@ -5,8 +5,12 @@ import "./connect.js"
 import express from "express"
 import cors from "cors"
 import booksRouter from "./routes/books.js"
+<<<<<<< HEAD
 import usersRouter from "./routes/user.js"
 //import cookieSession from "cookie-session"
+=======
+import cookieParser from ('cookie-parser')
+>>>>>>> 9dd3eab (first)
 
 
 /* app.use(
@@ -22,6 +26,7 @@ import usersRouter from "./routes/user.js"
 
 const app = express();
 app.use(express.json());
+app.use(cookieParser());
 app.use("/", express.static("public"));
 
 
