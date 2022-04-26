@@ -1,32 +1,18 @@
 import React, { useState } from "react";
 import "../style/CreateAccount.css";
+import { useNavigate } from "react-router-dom";
 
 
-
-function CreateAccount(props) {
-
+function CreateAccount() {
+const navigate = useNavigate();
 
   let [username, setUsername] = useState("")
   let [password,setPassword] = useState("")
   let [mail, setEmail] = useState("")
-  // let [admin, setAdmin] = useState(false)
-  
-
-  async function POSTuser(data) {
-    const fetchUsers = await fetch("/users/createAccount", {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-Type": "application/json"
-      },
-    });
-    return await fetchUsers.json();
-    
-  }
 
   const handleUsernameChange = (event) =>{
     setUsername(event.target.value)
-    event.preventDefault()
+    
    
   }
 
@@ -42,21 +28,35 @@ function CreateAccount(props) {
   }
 
     function handleSubmitForm(event) {
-      event.preventDefault();
+      event.preventDefault()
       console.log("You clicked submit.");
        
     }
 
-  const HandleSubmit = (data) => {
+
+    async function POSTuser(data) {
+      const getUsers = await fetch("users/createAccount", {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers:{
+          "Content-Type": "application/json",
+        }
+      })
+      navigate("/online");
+      return getUsers.json();
+    }
+
+  const HandleSubmit = () => {
     
-    data = {
+    let user =
+    {
       username,
       mail,
       password,
       isAdmin: false
     };
-    console.log(data)
-    POSTuser(data)
+    console.log(user)
+    POSTuser(user)
   }
    
   return (
@@ -65,12 +65,11 @@ function CreateAccount(props) {
         <div className="CreateNewAccountPlaceHolder">
           <h2>Create New Account</h2>
 
-        <form onSubmit={handleSubmitForm}>
+        <form method="POST" onSubmit={handleSubmitForm}>
             <div className="InputHolder">
               <label htmlFor="username">Username</label>
               <input
                 name="username"
-                defaultValue={""}
                 onChange={handleUsernameChange}
               ></input>
             </div>
@@ -78,7 +77,6 @@ function CreateAccount(props) {
               <label htmlFor="mail">Mail</label>
               <input
                 name="mail"
-                defaultValue={""}
                 onChange={handleMailChange}
               ></input>
             </div>
@@ -86,7 +84,6 @@ function CreateAccount(props) {
               <label htmlFor="password">Password</label>
               <input
                 name="password"
-                defaultValue={""}
                 onChange={handlePasswordChange}
               ></input>
             </div>
@@ -101,3 +98,18 @@ function CreateAccount(props) {
 }
 
 export default CreateAccount;
+
+  // let [admin, setAdmin] = useState(false)
+  
+
+  // async function POSTuser(data) {
+  //   const fetchUsers = await fetch("/users/add", {
+  //     method: "POST",
+  //     body: JSON.stringify(data),
+  //     headers: {
+  //       "Content-Type": "application/json"
+  //     },
+  //   });
+  //   return await fetchUsers.json();
+  //   navigate("/");
+  // }
