@@ -1,4 +1,6 @@
 
+import mongoose from "mongoose";
+import userModel from "./models/user.model.js";
 import "./connect.js"
 import express from "express"
 import cors from "cors"
@@ -6,7 +8,16 @@ import booksRouter from "./routes/books.js"
 import usersRouter from "./routes/user.js"
 import cookieSession from "cookie-session"
 
-const app = express();
+mongoose.connect(
+  "mongodb://localhost:27017/BookCircles",
+  { useNewUrlParser: true },
+  (err) => {
+    if (err) {
+      console.error("Kunde inte koppla upp databasen!");
+    }
+    console.log("Databasen är kopplad!");
+  }
+);
 
 app.use(
   cookieSession({
@@ -19,9 +30,14 @@ app.use(
   })
 );
 
+const app = express();
 app.use(express.json());
+app.use("/", express.static("public"));
+
+
 app.use(cors({ credentials: true, origin: ["http://localhost:3000"] }));
 app.use(express.static("public"));
+
 
 app.get('/', (req, res) => {
     res.json({ message: 'Hello World' });

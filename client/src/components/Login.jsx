@@ -1,6 +1,7 @@
 import React from "react";
 import "../style/Login.css"
 
+
 function Login() {
 
 
@@ -51,5 +52,6 @@ function Login() {
     </>
   );
 }
+
 
 export default Login;

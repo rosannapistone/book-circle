@@ -5,10 +5,11 @@ GET http://localhost:3001/users
 POST http://localhost:3001/users/add
 Content-Type: application/json
 
-{
-    "username": "hedda",
-    "password": "abcwoff",
-    "isStudent": false
+{   
+    "username": "test",
+    "mail": "test@test.com",
+    "password": "abcwoffwoff",
+    "isAdmin": false
 }
 
 ###
