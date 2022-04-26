@@ -11,17 +11,9 @@ function CreateAccount(props) {
   let [mail, setEmail] = useState("")
   // let [admin, setAdmin] = useState(false)
   
-  // async function getUser() {
-  //   try {
-  //     let response = await fetch("http://localhost:5500");
-  //     return await response.json();
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // }
 
   async function POSTuser(data) {
-    const fetchUsers = await fetch("/createAccount", {
+    const fetchUsers = await fetch("/users/createAccount", {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
@@ -109,25 +101,3 @@ function CreateAccount(props) {
 }
 
 export default CreateAccount;
-
-  // function HandleSubmit (e){
-  //   e.preventDefault();
-  //   let inputFields = document.getElementsByTagName("input");
-
-  //   let username = inputFields[0].value
-  //   let mail = inputFields[1].value
-  //   let password = inputFields[2].value
-  //   let isAdmin = false
-
-  //   let newuser = {
-  //     username,
-  //     mail,
-  //     password,
-  //     isAdmin
-  //   }
-  //   console.log(newuser)
-  //   POSTuser(newuser);
-  //   setTimeout(()=>{
-  //     getUser();
-  //   },1500)
-  // }
