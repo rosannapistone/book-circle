@@ -6,20 +6,10 @@ import express from "express"
 import cors from "cors"
 import booksRouter from "./routes/books.js"
 import usersRouter from "./routes/user.js"
-import cookieSession from "cookie-session"
+//import cookieSession from "cookie-session"
 
-mongoose.connect(
-  "mongodb://localhost:27017/BookCircles",
-  { useNewUrlParser: true },
-  (err) => {
-    if (err) {
-      console.error("Kunde inte koppla upp databasen!");
-    }
-    console.log("Databasen är kopplad!");
-  }
-);
 
-app.use(
+/* app.use(
   cookieSession({
     name: "session",
     keys: "aVeryS3cr3tk3y",
@@ -28,7 +18,7 @@ app.use(
     httpOnly: true,
     secure: false,
   })
-);
+);  */
 
 const app = express();
 app.use(express.json());
