@@ -2,90 +2,71 @@ import React, { useState } from "react";
 import "../style/CreateAccount.css";
 import { useNavigate } from "react-router-dom";
 
-
 function CreateAccount() {
-const navigate = useNavigate();
+  const navigate = useNavigate();
 
-  let [username, setUsername] = useState("")
-  let [password,setPassword] = useState("")
-  let [mail, setEmail] = useState("")
+  let [username, setUsername] = useState("");
+  let [password, setPassword] = useState("");
+  let [mail, setEmail] = useState("");
 
-  const handleUsernameChange = (event) =>{
-    setUsername(event.target.value)
-    
-   
-  }
+  const handleUsernameChange = (event) => {
+    setUsername(event.target.value);
+  };
 
   const handleMailChange = (event) => {
-    setEmail(event.target.value)
-    
-  }
-  
+    setEmail(event.target.value);
+  };
+
   const handlePasswordChange = (event) => {
-    setPassword(event.target.value)
-    
-  
+    setPassword(event.target.value);
+  };
+
+  function handleSubmitForm(event) {
+    event.preventDefault();
+    console.log("You clicked submit.");
   }
 
-    function handleSubmitForm(event) {
-      event.preventDefault()
-      console.log("You clicked submit.");
-       
-    }
-
-
-    async function POSTuser(data) {
-      const getUsers = await fetch("users/createAccount", {
-        method: "POST",
-        body: JSON.stringify(data),
-        headers:{
-          "Content-Type": "application/json",
-        }
-      })
-      navigate("/online");
-      return getUsers.json();
-    }
+  async function POSTuser(data) {
+    const getUsers = await fetch("/users/createAccount", {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    navigate("/online");
+    return getUsers.json();
+  }
 
   const HandleSubmit = () => {
-    
-    let user =
-    {
+    let user = {
       username,
       mail,
       password,
-      isAdmin: false
+      isAdmin: false,
     };
-    console.log(user)
-    POSTuser(user)
-  }
-   
+    console.log(user);
+    POSTuser(user);
+  };
+
   return (
     <>
       <div className="CreateNewAccountBox">
         <div className="CreateNewAccountPlaceHolder">
           <h2>Create New Account</h2>
 
-        <form method="POST" onSubmit={handleSubmitForm}>
+          <form method="POST" onSubmit={handleSubmitForm}>
             <div className="InputHolder">
               <label htmlFor="username">Username</label>
-              <input
-                name="username"
-                onChange={handleUsernameChange}
-              ></input>
+              <input name="username" onChange={handleUsernameChange}></input>
             </div>
             <div className="InputHolder">
               <label htmlFor="mail">Mail</label>
-              <input
-                name="mail"
-                onChange={handleMailChange}
-              ></input>
+              <input name="mail" onChange={handleMailChange}></input>
             </div>
             <div className="InputHolder">
               <label htmlFor="password">Password</label>
-              <input
-                name="password"
-                onChange={handlePasswordChange}
-              ></input>
+              <input name="password" onChange={handlePasswordChange}></input>
             </div>
             <div className="CreateAccountButtonPlaceHolder">
               <button onClick={HandleSubmit}>create account</button>
@@ -99,17 +80,24 @@ const navigate = useNavigate();
 
 export default CreateAccount;
 
-  // let [admin, setAdmin] = useState(false)
-  
+// function HandleSubmit (e){
+//   e.preventDefault();
+//   let inputFields = document.getElementsByTagName("input");
 
-  // async function POSTuser(data) {
-  //   const fetchUsers = await fetch("/users/add", {
-  //     method: "POST",
-  //     body: JSON.stringify(data),
-  //     headers: {
-  //       "Content-Type": "application/json"
-  //     },
-  //   });
-  //   return await fetchUsers.json();
-  //   navigate("/");
-  // }
+//   let username = inputFields[0].value
+//   let mail = inputFields[1].value
+//   let password = inputFields[2].value
+//   let isAdmin = false
+
+//   let newuser = {
+//     username,
+//     mail,
+//     password,
+//     isAdmin
+//   }
+//   console.log(newuser)
+//   POSTuser(newuser);
+//   setTimeout(()=>{
+//     getUser();
+//   },1500)
+// }
