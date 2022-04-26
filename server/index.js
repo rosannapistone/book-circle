@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import userModel from "./models/user.model.js";
 const hostname = "localhost";
 const port = 5500;
+import fs from "fs"
 
 mongoose.connect(
   "mongodb://localhost:27017/BookCircles",
@@ -18,8 +19,11 @@ mongoose.connect(
 
 
 const app = express();
-
 app.use(express.json());
+app.use("/", express.static("public"));
+
+
+
 app.get("/", async (req, res) => {
   try {
     const users = await userModel.find({});
@@ -30,12 +34,13 @@ app.get("/", async (req, res) => {
   }
 });
 
-app.post("/", async (req, res) => {
+app.post("/createAccount", async (req, res) => {
   try {
     const user = new userModel({
       username: req.body.username,
       password: req.body.password,
-      isStudent: req.body.isStudent,
+      mail: req.body.mail,
+      isAdmin: req.body.isAdmin,
     });
     console.log(user);
     await user.save();
@@ -49,6 +54,8 @@ app.post("/", async (req, res) => {
     res.send("Other error poop...");
   }
 });
+
+
 
 app.put("/:id", async (req, res) => {
   try {
