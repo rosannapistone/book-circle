@@ -21,7 +21,7 @@ function CreateAccount(props) {
   // }
 
   async function POSTuser(data) {
-    const fetchUsers = await fetch("/createAccount", {
+    const fetchUsers = await fetch("/users/createAccount", {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
