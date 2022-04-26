@@ -13,7 +13,7 @@ const router = express.Router();
 //import {Book} from "../models/book.model.js"
 
 router.get("/", (req, res) => {
-  bookModel.find()
+  bookModel.find()//.populate('user') // for att fa tag pa user pa clientsidan, hamta user.name typ
     .then((books) => res.json(books))
     .catch((err) => res.status(400).json("Error: " + err));
 });
@@ -31,7 +31,7 @@ router.post("/add", (req, res) => {
   /* if (!req.session.username) {
     return res.status(400).json("You are not logged in");
   } */
-  //const userId = req.session.userId;
+
   //const username = req.session.username;
   const title = req.body.title;
   const author = req.body.author;

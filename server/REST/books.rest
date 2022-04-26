@@ -1,5 +1,5 @@
 //GET all books 
-GET http://localhost:3001
+GET http://localhost:3001/books
 
 ###
 
@@ -18,10 +18,15 @@ POST http://localhost:3001/books/add
 Content-Type: application/json
 
 {
-"title": "Nalle Puh", 
-"author": "Disney",
-"description": "About a mermaid",
-"review": "Very good"
+"title": "Harry Potter and the Goblet of Fire", 
+"author": "J.K. Rowling",
+"description": "This is the fourth novel in the Harry Potter series. It follows
+            Harry Potter, a wizard in his fourth year at Hogwarts School of
+            Witchcraft and Wizardry, and the mystery surrounding the entry of
+            Harry's name into the Triwizard Tournament, in which he is forced to
+            compete.",
+"review": "The book is imaginative, funny, frightening and, of course, magical! 
+            What makes them so successful is that they combine action, fantasy and friendship."
 }
 
 ###
