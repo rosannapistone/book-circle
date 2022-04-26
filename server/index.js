@@ -5,6 +5,8 @@ import "./connect.js"
 import express from "express"
 import cors from "cors"
 import booksRouter from "./routes/books.js"
+import usersRouter from "./routes/user.js"
+import cookieSession from "cookie-session"
 
 mongoose.connect(
   "mongodb://localhost:27017/BookCircles",
@@ -17,77 +19,21 @@ mongoose.connect(
   }
 );
 
+app.use(
+  cookieSession({
+    name: "session",
+    keys: "aVeryS3cr3tk3y",
+    maxAge: 1000 * 3600, //60min
+    sameSite: "strict",
+    httpOnly: true,
+    secure: false,
+  })
+);
+
 const app = express();
 app.use(express.json());
 app.use("/", express.static("public"));
 
-
-
-app.get("/", async (req, res) => {
-  try {
-    const users = await userModel.find({});
-    res.json(users);
-  } catch (err) {
-    console.log(err);
-    res.send("Other error...");
-  }
-});
-
-app.post("/createAccount", async (req, res) => {
-  try {
-    const user = new userModel({
-      username: req.body.username,
-      password: req.body.password,
-      mail: req.body.mail,
-      isAdmin: req.body.isAdmin,
-    });
-    console.log(user);
-    await user.save();
-
-    res.json(user);
-  } catch (err) {
-    if (err.code == 11000) {
-      res.send("Username already exists...");
-      return;
-    }
-    res.send("Other error poop...");
-  }
-});
-
-
-
-app.put("/:id", async (req, res) => {
-  try {
-    const { id } = req.params;
-
-    const user = await userModel.findByIdAndUpdate(id, req.body);
-
-    res.json({
-      old: user,
-      new: req.body,
-    });
-  } catch (err) {
-    if (err.code == 11000) {
-      res.send("Username already exists...");
-      return;
-    }
-    res.send("Other error...");
-  }
-});
-
-app.delete("/:id", async (req, res) => {
-  try {
-    const { id } = req.params;
-    const removedUser = await userModel.findByIdAndRemove(id);
-    if (!removedUser) {
-      res.send("Id existerar ej!");
-      return;
-    }
-    res.json(removedUser);
-  } catch (err) {
-    res.send("Other error...");
-  }
-});
 
 app.use(cors({ credentials: true, origin: ["http://localhost:3000"] }));
 app.use(express.static("public"));
@@ -98,8 +44,7 @@ app.get('/', (req, res) => {
   });
 
 // Routes for users
-//const usersRouter = require("./routes/users");
-//app.use("/users", usersRouter);
+app.use("/users", usersRouter);
 
 // Route for books
 app.use("/books", booksRouter);
