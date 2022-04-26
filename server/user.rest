@@ -2,13 +2,14 @@ GET http://localhost:5500
 
 ###
 
-POST http://localhost:5500
+POST http://localhost:5500/createAccount
 Content-Type: application/json
 
-{
-    "username": "hedda",
-    "password": "abcwoff",
-    "isStudent": false
+{   
+    "username": "test",
+    "mail": "test@test.com",
+    "password": "abcwoffwoff",
+    "isAdmin": false
 }
 
 ###
