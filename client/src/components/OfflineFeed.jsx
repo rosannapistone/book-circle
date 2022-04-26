@@ -1,49 +1,50 @@
-import { Grid, Typography } from "@mui/material";
-import { Box } from "@mui/system";
+import { useEffect, useState } from "react";
+import "./OfflineFeed.css";
+
 export default function OfflineFeed() {
+  const [bookData, setBookData] = useState([]);
+
+  async function getAllBooks() {
+    const response = await fetch("/books", {
+      method: "GET",
+      //body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const result = await response.json();
+    setBookData(result);
+    console.log(bookData);
+  }
+
+  useEffect(() => {
+    getAllBooks();
+  });
+
   return (
-    <div style={{ marginTop: "9rem" }}>
-      <Grid container>
-        <Grid
-          item
-          md={4}
-          sm={5}
-          sx={{
-            mt: "0.1%",
-            mb: "3%",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            alignContent: "center",
-          }}
-        >
-          <Box
-            sx={{
-              backgroundColor: "#ede8ea",
-              height: 300,
-              width: 300,
-            }}
-          >
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                textAlign: "start",
-                padding: "1rem",
-              }}
-            >
-              <Typography variant="h6">Title:</Typography>
-              <Typography variant="h6">Author:</Typography>
-              <Typography>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Non
-                exercitationem veritatis aspernatur ad. Voluptate omnis sequi in
-                sunt, fuga magni veritatis recusandae inventore iusto
-                exercitationem beatae, voluptatem eius obcaecati dignissimos.
-              </Typography>
-            </Box>
-          </Box>
-        </Grid>
-      </Grid>
+    <div className="container">
+      <div className="myPosts">
+        {bookData.map((item) => {
+          return (
+            <div key={item.id} className="postContainer">
+              <div className="textContainer">
+                <p className="title">{item.title}</p>
+                <p className="author">{item.author}</p>
+                <p>
+                  Description
+                  <br></br>
+                  {item.description}
+                </p>
+                <p>
+                  Username's review
+                  <br></br>
+                  {item.review}
+                </p>
+              </div>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }

@@ -1,9 +1,10 @@
-import express from "express";
+
 import mongoose from "mongoose";
 import userModel from "./models/user.model.js";
-const hostname = "localhost";
-const port = 5500;
-import fs from "fs"
+import "./connect.js"
+import express from "express"
+import cors from "cors"
+import booksRouter from "./routes/books.js"
 
 mongoose.connect(
   "mongodb://localhost:27017/BookCircles",
@@ -15,8 +16,6 @@ mongoose.connect(
     console.log("Databasen är kopplad!");
   }
 );
-
-
 
 const app = express();
 app.use(express.json());
@@ -90,27 +89,21 @@ app.delete("/:id", async (req, res) => {
   }
 });
 
-app.listen(port, hostname, () => {
-  console.log(`Server is running on http://${hostname}:${port}`);
-});
-// const userSchema = mongoose.Schema({
-//   userName: String,
-//   mail: String,
-//   password: String,
-//   id: String,
-// });
+app.use(cors({ credentials: true, origin: ["http://localhost:3000"] }));
+app.use(express.static("public"));
 
-// const User = mongoose.model("User", userSchema);
 
-// const firstUser = new mongoose.Schema({
-//   userName: "robertha",
-//   mail: "mail",
-//   password: "qwerty123",
-//   id: "12",
-// });
+app.get('/', (req, res) => {
+    res.json({ message: 'Hello World' });
+  });
 
-// await firstUser.save();
-// console.log(firstUser.userName, firstUser.password);
+// Routes for users
+//const usersRouter = require("./routes/users");
+//app.use("/users", usersRouter);
 
-// const users = await User.find();
-// console.log(users);
+// Route for books
+app.use("/books", booksRouter);
+
+// Server running
+app.listen(3001, () => console.log("Listening at 3001"));
+

@@ -1,0 +1,49 @@
+//GET all books 
+GET http://localhost:3001/books
+
+###
+
+// GET my own posts 
+GET http://localhost:3001/books/getownbooks
+
+###
+
+// GET one specific post 
+GET http://localhost:3001/books/id
+
+###
+
+// Create a post 
+POST http://localhost:3001/books/add 
+Content-Type: application/json
+
+{
+"title": "Harry Potter and the Goblet of Fire", 
+"author": "J.K. Rowling",
+"description": "This is the fourth novel in the Harry Potter series. It follows
+            Harry Potter, a wizard in his fourth year at Hogwarts School of
+            Witchcraft and Wizardry, and the mystery surrounding the entry of
+            Harry's name into the Triwizard Tournament, in which he is forced to
+            compete.",
+"review": "The book is imaginative, funny, frightening and, of course, magical! 
+            What makes them so successful is that they combine action, fantasy and friendship."
+}
+
+###
+
+// UPDATE a specific post 
+PUT http://localhost:3001/books/62669a652e7cb5b51bebc63c
+Content-Type: application/json
+
+{
+"title": "Pippi", 
+"author": "Astrid",
+"description": "Start tjej",
+"review": "Ball"
+}
+
+###
+
+// DELETE a specific post 
+DELETE http://localhost:3001/books/62669a652e7cb5b51bebc63c
+Content-Type: application/json
