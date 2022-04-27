@@ -35,11 +35,6 @@ app.use(
   })
 );
 
-app.use("/", (req, res, next) => {
-  console.log(req.session);
-  next();
-});
-
 // Routes for users
 app.use("/users", usersRouter);
 // Route for books

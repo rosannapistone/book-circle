@@ -1,10 +1,7 @@
 import React from "react";
-import "../style/Login.css"
-
+import "../style/Login.css";
 
 function Login() {
-
-
   return (
     <>
       <div>
@@ -19,7 +16,7 @@ function Login() {
           <div class="CreateAccountPlaceHolder">
             <h2>Create Account</h2>
             <p>
-              If you don’t have an account, create one by pressing the button
+              If you don't have an account, create one by pressing the button
               below:
             </p>
             <a href={"/createaccount"}>
@@ -52,6 +49,5 @@ function Login() {
     </>
   );
 }
-
 
 export default Login;
