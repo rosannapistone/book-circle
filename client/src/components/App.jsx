@@ -7,11 +7,9 @@ import OnlineFeed from "./OnlineFeed";
 import MyPosts from "./MyPosts";
 import CreatePost from "./CreatePost";
 import CreateAccount from "./CreateAccount";
-import LogInContextProvider from "./LogInContext"
 
 function App() {
   return (
-    <LogInContextProvider>
     <div className="App">
       <BrowserRouter>
         <Header />
@@ -25,7 +23,6 @@ function App() {
         </Routes>
       </BrowserRouter>
     </div>
-    </LogInContextProvider>
   );
 }
 
