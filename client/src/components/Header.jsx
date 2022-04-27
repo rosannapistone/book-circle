@@ -1,9 +1,5 @@
 import Logo from "../assets/logo.png";
-import { LogInContext } from "./LogInContext";
-import { useContext } from "react";
-import { FaGlasses } from "react-icons/fa";
-import { MdPostAdd } from "react-icons/md";
-import { Link } from "react-router-dom";
+
 
 export default function Header() {
   //const { isLogedIn, setIsLogedIn} = useContext(LogInContext);
