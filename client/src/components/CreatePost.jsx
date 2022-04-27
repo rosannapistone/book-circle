@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./CreatePost.css";
+import "../style/CreatePost.css";
 import { FaGlasses } from "react-icons/fa";
 import { MdMenuBook } from "react-icons/md";
 import { MdPostAdd } from "react-icons/md";
@@ -57,8 +57,13 @@ function CreatePost() {
     <div className="container">
       <div className="heading">
         <div>
+        <Link
+            to={"/feed"}
+            style={{ textDecoration: "none", color: "black" }}
+          >
           <MdMenuBook size={30} color="#87204D" />
           <p>Go to feed</p>
+          </Link>
         </div>
         <div>
           <MdPostAdd size={40} color="#87204D" />

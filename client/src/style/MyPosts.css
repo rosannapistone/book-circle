@@ -32,11 +32,12 @@
 .postContainer {
   background-color: #ede8ea;
   border-radius: 0.4rem;
+  width: 20rem;
 }
 
 .textContainer {
   height: 20rem;
-  width: 20rem;
+  width: 18rem;
   margin: 1rem;
   overflow: hidden;
   overflow-y: scroll;
@@ -101,4 +102,22 @@
   background-color: #87204d;
   color: white;
   border-radius: 0.2rem;
+}
+
+@media (max-width: 400px) {
+  .postContainer {
+    width: 18rem;
+   }
+  .textContainer {
+   width: 16rem;
+  }
+}
+
+@media (max-width: 330px) {
+  .postContainer {
+    width: 16rem;
+   }
+  .textContainer {
+   width: 14rem;
+  }
 }

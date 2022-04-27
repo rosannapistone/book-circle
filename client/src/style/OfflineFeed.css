@@ -5,6 +5,8 @@
   .posts {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 2rem;
   }
   
   .postContainer {
@@ -38,4 +40,16 @@
     justify-content: center;
     flex-direction: column;
     color: #87204d;
+  }
+
+  @media (max-width: 400px) {
+    .textContainer {
+     width: 18rem;
+    }
+  }
+
+  @media (max-width: 330px) {
+    .textContainer {
+     width: 16rem;
+    }
   }

@@ -1,0 +1,54 @@
+.container {
+    height: 100vh;
+  }
+  
+  .posts {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .postContainer {
+    background-color: #ede8ea;
+    border-radius: 0.4rem;
+    margin: .5rem;
+  }
+  
+  .textContainer {
+    height: 20rem;
+    width: 20rem;
+    margin: 1rem;
+    overflow: hidden;
+    overflow-y: scroll;
+    text-align: left;
+  }
+  
+  .title {
+    font-size: larger;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    color: #87204d;
+  }
+
+  .author {
+    font-size: larger;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    color: #87204d;
+  }
+
+  @media (max-width: 400px) {
+    .textContainer {
+     width: 18rem;
+    }
+  }
+
+  @media (max-width: 330px) {
+    .textContainer {
+     width: 16rem;
+    }
+  }

@@ -5,6 +5,17 @@ import bcrypt from "bcrypt";
 
 const router = express.Router();
 
+//Test Rosanna
+router.get("/", (req, res) => {
+  userModel.find()//.populate('user') // for att fa tag pa user pa clientsidan, hamta user.name typ
+    .then((users) => res.json(users))
+    .catch((err) => res.status(400).json("Error: " + err));
+});
+
+
+
+
+
 router.get("/", async (req, res) => {
   try {
     const users = await userModel.findById(req.session.user);

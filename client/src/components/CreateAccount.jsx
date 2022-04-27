@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import "../style/CreateAccount.css";
-import { useNavigate } from "react-router-dom";
+//import { useNavigate } from "react-router-dom";
 
 function CreateAccount() {
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
 
   let [username, setUsername] = useState("");
   let [password, setPassword] = useState("");
@@ -32,8 +32,8 @@ function CreateAccount() {
         body: JSON.stringify(data),
         headers:{
           "Content-Type": "application/json",
-        }
-      })
+        },
+      });
       // navigate("/myposts");
       return getUsers.json()
       // .then(alert("account created! return to homepage to sign in"))
@@ -47,7 +47,6 @@ function CreateAccount() {
         alert(error)
       }
     })
-      
     }
 
 
@@ -82,7 +81,7 @@ function CreateAccount() {
               <input name="password" onChange={handlePasswordChange}></input>
             </div>
             <div className="CreateAccountButtonPlaceHolder">
-              <button onClick={HandleSubmit}>create account</button>
+              <button onClick={HandleSubmit}>Sign up</button>
             </div>
           </form>
         </div>
