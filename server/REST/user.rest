@@ -2,13 +2,13 @@ GET http://localhost:3001/users
 
 ###
 
-POST http://localhost:3001/users/add
+POST http://localhost:3001/users/createAccount
 Content-Type: application/json
 
 {   
-    "username": "test",
-    "mail": "test@test.com",
-    "password": "abcwoffwoff",
+    "username": "esty24",
+    "mail": "nomail.se",
+    "password": "secret",
     "isAdmin": false
 }
 
