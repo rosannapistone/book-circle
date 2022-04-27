@@ -25,18 +25,31 @@ function CreateAccount() {
     event.preventDefault();
     console.log("You clicked submit.");
   }
+  
+    async function POSTuser(data) {
+      const getUsers = await fetch("users/createAccount", {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers:{
+          "Content-Type": "application/json",
+        }
+      })
+      // navigate("/myposts");
+      return getUsers.json()
+      // .then(alert("account created! return to homepage to sign in"))
+      .then(getUsers => { alert("account created, return to homepage to log in")})
+      // .then(response => {this._router.navigate(['/mainpage'])})
+      // .catch((err)=>{alert(err)})
+      .catch((error)=>{
+      if (error = 404){
+        alert("USERNAME ALREADY EXIST")
+      } else {
+        alert(error)
+      }
+    })
+      
+    }
 
-  async function POSTuser(data) {
-    const getUsers = await fetch("/users/createAccount", {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    navigate("/online");
-    return getUsers.json();
-  }
 
   const HandleSubmit = () => {
     let user = {

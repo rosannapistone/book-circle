@@ -6,7 +6,7 @@ POST http://localhost:3001/users/createAccount
 Content-Type: application/json
 
 {   
-    "username": "esty24",
+    "username": "esty245",
     "mail": "nomail.se",
     "password": "secret",
     "isAdmin": false
