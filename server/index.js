@@ -8,6 +8,13 @@ import booksRouter from "./routes/books.js"
 import usersRouter from "./routes/user.js"
 //import cookieSession from "cookie-session"
 
+mongoose.connect("mongodb://localhost:27017/bookCircles", { useNewUrlParser: true }, (err) => {
+    if(err) {
+        console.error("Kunde inte koppla upp databasen!")
+    }
+    console.log("Databasen är kopplad!")
+})
+
 
 /* app.use(
   cookieSession({

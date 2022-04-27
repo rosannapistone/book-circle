@@ -51,3 +51,54 @@
   flex-direction: column;
   color: #87204d;
 }
+
+.popup-div {
+ width: 20rem;
+ background-color: white;
+ border-radius: 1rem;
+ padding: 1rem;
+ 
+}
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 0.5rem;
+}
+
+.form input {
+  background-color: white;
+  border: none;
+  border-radius: 0.2rem;
+  height: 1.5rem;
+}
+
+.form textarea {
+  background-color: white;
+  border: none;
+  height: 4rem;
+  border-radius: 0.2rem;
+}
+
+.form label {
+  display: flex;
+  justify-content: left;
+  margin-bottom: 0.2rem;
+}
+
+.formContainer button {
+  margin-left: 32%;
+  margin-top: 0.5rem;
+  border: none;
+  background-color: #87204d;
+  color: white;
+  border-radius: 0.2rem;
+}
