@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import "./OfflineFeed.css";
+import "./Feed.css";
 
 export default function OfflineFeed() {
   const [bookData, setBookData] = useState([]);
