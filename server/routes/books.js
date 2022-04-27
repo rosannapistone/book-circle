@@ -3,6 +3,8 @@ import express from "express";
 import Router from "express";
 import bookModel from "../models/book.model.js";
 
+
+
 const router = express.Router();
 
 router.get("/", (req, res) => {
@@ -12,13 +14,13 @@ router.get("/", (req, res) => {
 });
 
 router.get("/getownbooks", (req, res) => {
-  //bookModel.find({ userId: req.session.userId })
+  bookModel.find({ userId: req.session.userId })
   then((books) => res.json(books))
   .catch((err) => res.status(400).json("Error: " + err))
 });
 
 router.post("/add", (req, res) => {
-  /* if (!req.session.username) {
+ /*  if (!req.session.username) {
     return res.status(400).json("You are not logged in");
   } */
 
