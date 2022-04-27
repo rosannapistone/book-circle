@@ -42,8 +42,20 @@ const navigate = useNavigate();
           "Content-Type": "application/json",
         }
       })
-      navigate("/online");
-      return getUsers.json();
+      // navigate("/myposts");
+      return getUsers.json()
+      // .then(alert("account created! return to homepage to sign in"))
+      .then(getUsers => { alert("account created, return to homepage to log in")})
+      // .then(response => {this._router.navigate(['/mainpage'])})
+      // .catch((err)=>{alert(err)})
+      .catch((error)=>{
+      if (error = 404){
+        alert("USERNAME ALREADY EXIST")
+      } else {
+        alert(error)
+      }
+    })
+      
     }
 
   const HandleSubmit = () => {

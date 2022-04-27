@@ -18,24 +18,29 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/createAccount", async (req, res) => {
-  try {
-    const user = new userModel({
-      username: req.body.username,
-      password: req.body.password,
-      mail: req.body.mail,
-      isAdmin: req.body.isAdmin,
-    });
-    console.log(user);
-    await user.save();
+  
+    
+     const username = req.body.username;
+     const password = req.body.password;
+     const mail = req.body.mail;
+     const isAdmin = req.body.isAdmin;
 
-    res.json(user);
-  } catch (err) {
-    if (err.code == 11000) {
-      res.send("Username already exists...");
-      return;
+     const user = new userModel({ username, password, mail, isAdmin});
+
+    const checkUsername = await userModel.findOne({username: req.body.username})
+    if(checkUsername){
+      res.status(409)
+      .send("username already exist! chose another one.")
+      return
+    } else if(!checkUsername){
+       await user.save()
+    .then(()=> res.json(user))
+    // .catch(error => res.send("invalid user name or username already exist"))
+    .catch((err) => res.status(400).json("Error: " + err));
+    console.log(user+ " USER ADDED")
+    
     }
-    res.send("Other error poop...");
-  }
+
 });
 
 
