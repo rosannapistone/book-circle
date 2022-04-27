@@ -2,7 +2,7 @@
     height: 100vh;
   }
   
-  .myPosts {
+  .posts {
     display: flex;
     flex-wrap: wrap;
   }

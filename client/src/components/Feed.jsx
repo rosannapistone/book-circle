@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
-import "./OfflineFeed.css";
+import "./Feed.css";
 
-export default function OfflineFeed() {
+export default function Feed() {
   const [bookData, setBookData] = useState([]);
+
+  //window.addEventListener('load', getAllBooks())
 
   async function getAllBooks() {
     const response = await fetch("/books", {
@@ -19,11 +21,11 @@ export default function OfflineFeed() {
 
   useEffect(() => {
     getAllBooks();
-  });
+  }, []); 
 
   return (
     <div className="container">
-      <div className="myPosts">
+      <div className="posts">
         {bookData.map((item) => {
           return (
             <div key={item.id} className="postContainer">
@@ -36,7 +38,7 @@ export default function OfflineFeed() {
                   {item.description}
                 </p>
                 <p>
-                  Username's review
+                  Username's review {item.user}
                   <br></br>
                   {item.review}
                 </p>
