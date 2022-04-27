@@ -1,5 +1,5 @@
 // Create connection to the database
-import mongoose from "mongoose"
+import mongoose from "mongoose";
 
 // mongoose.connect("mongodb://localhost:27917/bookCircles", {
 //   useNewUrlParser: true,
@@ -12,14 +12,14 @@ import mongoose from "mongoose"
 //   console.log("Connection created!");
 // });
 
-mongoose.connect(
-  "mongodb://localhost:27017/BookCircles",
-  { useNewUrlParser: true },
-  (error) => {
-    if (error) {
-      console.error("failed, something wrong");
-    } else {
-    console.log("partaj de funkar nu är databasen kopplad!");
-    }
-  }
-);
+// mongoose.connect(
+//   "mongodb://localhost:27017/BookCircles",
+//   { useNewUrlParser: true },
+//   (error) => {
+//     if (error) {
+//       console.error("failed, something wrong");
+//     } else {
+//       console.log("partaj de funkar nu är databasen kopplad!");
+//     }
+//   }
+// );
