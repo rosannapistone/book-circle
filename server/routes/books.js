@@ -8,27 +8,30 @@ import bookModel from "../models/book.model.js";
 const router = express.Router();
 
 router.get("/", (req, res) => {
-  bookModel.find().populate({
+   bookModel.find().populate({
     path: "userID",
-    select: "username"
-  })
+    select: "username",
+  }) 
    // for att fa tag pa user pa clientsidan, hamta user.name typ
     .then((books) => res.json(books))
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
 router.get("/getownbooks", (req, res) => {
-  bookModel.find({ userID: req.session.userID })
-  then((books) => res.json(books))
+  bookModel.find().populate({
+    path: "userID",
+    select: "username",
+  }) //({ userID: req.session.userID })
+  .then((books) => res.json(books))
   .catch((err) => res.status(400).json("Error: " + err))
 });
 
 router.post("/add", (req, res) => {
-   if (!req.session.username) {
-    return res.status(400).json("You are not logged in");
-  }  
+    if (!req.session.username) {
+    console.log('funkar det?')//return res.status(400).json("You are not logged in");
+  }   
 
-  const username = req.session.username;
+  const username = req.session.username; 
   const title = req.body.title;
   const author = req.body.author;
   const description = req.body.description;

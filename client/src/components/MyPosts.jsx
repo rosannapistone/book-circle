@@ -1,5 +1,5 @@
 import React from "react";
-import "../style/MyPosts.css"
+import "../style/MyPosts.css";
 import { FaGlasses } from "react-icons/fa";
 import { MdMenuBook } from "react-icons/md";
 import { MdPostAdd } from "react-icons/md";
@@ -12,11 +12,9 @@ import { useContext } from "react";
 import { LogInContext } from "./LogInContext";
 
 function MyPosts() {
-  const [bookData, setBookData] = useState([]);
-  const [userBookData, setUserBookData] = useState([])
-  const { isLoggedIn, setIsLoggedIn} = useContext(LogInContext);
-
- 
+  //const [bookData, setBookData] = useState([]);
+  const [userBookData, setUserBookData] = useState([]);
+  const { isLoggedIn, setIsLoggedIn } = useContext(LogInContext);
 
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
@@ -49,7 +47,7 @@ function MyPosts() {
     postEditedData(data, _id);
   }
 
-  //PUT
+  //PUT edit post
   async function postEditedData(data, _id) {
     const response = await fetch(`/books/${_id}`, {
       method: "PUT",
@@ -63,6 +61,7 @@ function MyPosts() {
     getAllBooks();
   }
 
+  //GET all posts of logged in user
   async function getAllBooks() {
     const response = await fetch("/books/getownbooks", {
       method: "GET",
@@ -72,21 +71,27 @@ function MyPosts() {
       },
     });
     const result = await response.json();
-    setUserBookData(result)
-    //setBookData(result);
-    console.log(result)
+    setUserBookData(result);
+    console.log(result);
   }
 
-  useEffect(() => {
-    getAllBooks();
-  }, [setBookData], [setIsLoggedIn(true)]);
+  // Calls the GET method to display all
+  // the logged in users posts in the UI
+  useEffect(
+    () => {
+      getAllBooks();
+    },
+    [setUserBookData],
+    [setIsLoggedIn(true)]
+  );
 
+  //DELETE post
   function deleteBook(book) {
-    bookData.splice(book, 1);
+    userBookData.splice(book, 1);
     deleteData(book._id);
   }
 
-  //DELETE
+  //DELETE from database
   async function deleteData(_id) {
     const response = await fetch(`/books/${_id}`, {
       method: "DELETE",
@@ -100,12 +105,9 @@ function MyPosts() {
     <div className="container">
       <div className="heading">
         <div>
-        <Link
-            to={"/feed"}
-            style={{ textDecoration: "none", color: "black" }}
-          >
-          <MdMenuBook size={30} color="#87204D" />
-          <p>Go to feed</p>
+          <Link to={"/feed"} style={{ textDecoration: "none", color: "black" }}>
+            <MdMenuBook size={30} color="#87204D" />
+            <p>Go to feed</p>
           </Link>
         </div>
         <div>
@@ -124,7 +126,7 @@ function MyPosts() {
       </div>
 
       <div className="myPosts">
-        {bookData.map((item) => {
+        {userBookData.map((item) => {
           return (
             <div key={item.id} className="postContainer">
               <div className="edit">

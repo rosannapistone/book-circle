@@ -19,7 +19,7 @@ export default function Feed() {
       },
     });
     const result = await response.json();
-    //console.log(result)
+    console.log(result)
     setBookData(result);
     //console.log(bookData);
 

@@ -2,12 +2,13 @@ import mongoose from "mongoose"
 
 const bookSchema = new mongoose.Schema(
   {
+    username: String,
     title: String,
     author: String,
     description: String,
     review: String,
     
-    "userID": [{type: mongoose.Schema.Types.ObjectId, strictPopulate: false, ref: "user"}]
+    userID: [{type: mongoose.Schema.Types.ObjectId, strictPopulate: false, ref: "user"}]
      
     //username: String,
     

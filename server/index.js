@@ -7,17 +7,17 @@ import booksRouter from "./routes/books.js";
 import usersRouter from "./routes/user.js";
 import cookieSession from "cookie-session";
 
-mongoose.connect(
-  "mongodb://localhost/BookCircles",
-  { useNewUrlParser: true },
-  (err) => {
-    if (err) {
-      console.error("Kunde inte koppla upp databasen!");
-    }
+ mongoose.connect(
+   "mongodb://localhost/bookCircles",
+   { useNewUrlParser: true },
+   (err) => {
+     if (err) {
+       console.error("Kunde inte koppla upp databasen!");
+     }
 
-    console.log("Databasen är kopplad!");
-  }
-);
+     console.log("Databasen är kopplad!");
+   }
+ ); 
 
 const app = express();
 app.use(express.json());
@@ -25,7 +25,7 @@ app.use("/", express.static("public"));
 
 app.use(cors({ credentials: true, origin: ["http://localhost:3000"] }));
 
-app.use(
+ app.use(
   cookieSession({
     name: "session",
     secret: "aVeryS3cr3tk3y",
@@ -34,7 +34,7 @@ app.use(
     httpOnly: true,
     secure: false,
   })
-);
+);  
 
 // Routes for users
 app.use("/users", usersRouter);
