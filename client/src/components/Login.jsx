@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "../style/Login.css";
 //import { Link } from "react-router-dom";
 import { useContext } from "react";
@@ -6,19 +6,51 @@ import { LogInContext } from "./LogInContext";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const { loggedInUser, login } = useContext(LogInContext);
+  const [failedLogin, setFailedLogin] = useState(false);
 
-  const { isLoggedIn, setIsLoggedIn} = useContext(LogInContext);
+  let [logInUsername, setLogInUsername] = useState("");
+  let [logInPassword, setLogInPassword] = useState("");
+  //const navigate = useNavigate()
 
-  function handleLogIn() {
-    setIsLoggedIn(true)
-    console.log(isLoggedIn) //function fungerar ej.
-    navigate("/feed")
+  const handleUsernameChange = (event) => {
+    setLogInUsername(event.target.value);
+    console.log(setLogInUsername);
+  };
+
+  const handleLogInPasswordChange = (event) => {
+    setLogInPassword(event.target.value);
+    console.log(setLogInPassword);
+  };
+
+  async function handleLogIn(data) {
+    let status = await login(data);
+
+    if (!status) {
+      setFailedLogin(true);
+    } else {
+      navigate("/feed");
+    }
+
+    // console.log(login); //function fungerar ej.
+    // /* navigate("/feed"); */
   }
+
+  const HandleSubmit = () => {
+    let user = {
+      logInUsername,
+      logInPassword,
+    };
+    console.log(user);
+    console.log(failedLogin);
+    handleLogIn(user);
+  };
 
   return (
     <>
       <div>
+        <h1>{failedLogin ? "FEL UPPGIFTER" : undefined}</h1>
         <h1>Welcome To The Book Circle!</h1>
         <p>
           Get inspired and browse thousands of book reviews, contribute, add and
@@ -40,25 +72,32 @@ function Login() {
 
           <div className="loginPlaceHolder">
             <h2>Login or Continue Offline</h2>
-            <form>
-              <div className="InputHolder">
-                <label htmlFor="userName">Username</label>
-                <input name="userName"></input>
-              </div>
-              <div className="InputHolder">
-                <label htmlFor="passWord">Password</label>
-                <input name="passWord"></input>
-              </div>
-              <div className="logInButtonPlaceHolder">
+            <div className="InputHolder">
+              <label htmlFor="userName">Username</label>
+              <input name="userName" onChange={handleUsernameChange}></input>
+            </div>
+            <div className="InputHolder">
+              <label htmlFor="passWord">Password</label>
+              <input
+                name="passWord"
+                onChange={handleLogInPasswordChange}
+              ></input>
+            </div>
+            <div className="logInButtonPlaceHolder">
               {/*   <p>
                   Forgot Login details?
                   <p style={{ color: "red" }}>click here</p>
                 </p> */}
-                {/* <Link to={'/feed'}> */}
-                  <button onClick={ () => {handleLogIn()}}>Log in</button>
-                  {/* </Link> */}
-              </div>
-            </form>
+              {/* <Link to={'/feed'}> */}
+              <button
+                onClick={() => {
+                  HandleSubmit();
+                }}
+              >
+                Log in
+              </button>
+              {/* </Link> */}
+            </div>
           </div>
         </div>
       </div>
