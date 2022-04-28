@@ -1,14 +1,14 @@
-// Create connection to the database
+//Create connection to the database
 
-/* import mongoose from "mongoose"
+ import mongoose from "mongoose"
 
- mongoose.connect("mongodb://localhost/bookCircles", {
-  useNewUrlParser: true,
-   useUnifiedTopology: true,
- });  */
+//  mongoose.connect("mongodb://localhost/bookCircles", {
+//   useNewUrlParser: true,
+//    useUnifiedTopology: true,
+//  });  
 
 
-/*  mongoose.connect(
+  mongoose.connect(
   "mongodb://localhost/BookCircles",
   { useNewUrlParser: true },
   (error) => {
@@ -18,7 +18,7 @@
     console.log("partaj de funkar nu är databasen kopplad!");
     }
   }
-);  */
+);  
 
 /* var db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));

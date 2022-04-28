@@ -28,14 +28,16 @@ router.get("/", async (req, res) => {
 
 
 router.post("/createAccount", async (req, res) => {
-  
+  const cryptedPassword = await bcrypt.hash(req.body.password, 10);
     
      const username = req.body.username;
      const password = req.body.password;
      const mail = req.body.mail;
      const isAdmin = req.body.isAdmin;
 
-     const user = new userModel({ username, password, mail, isAdmin});
+     
+     const user = new userModel({ username:username, password:cryptedPassword, mail, isAdmin});
+     
 
     const checkUsername = await userModel.findOne({username: req.body.username})
     if(checkUsername){
@@ -52,23 +54,6 @@ router.post("/createAccount", async (req, res) => {
 
 });
 
-router.put("/:id", async (req, res) => {
-  try {
-    const { id } = req.params;
-    const user = await userModel.findByIdAndUpdate(id, req.body);
-
-    res.json({
-      old: user,
-      new: req.body,
-    });
-  } catch (err) {
-    if (err.code == 11000) {
-      res.send("Username already exists...");
-      return;
-    }
-    res.send("Other error...");
-  }
-});
 
 router.get("/:id", (req, res) => {
   const { id } = req.params;
@@ -81,6 +66,7 @@ router.get("/:id", (req, res) => {
     return res.send(findUser);
   }
 });
+
 
 router.delete("/:id", async (req, res) => {
   try {
@@ -100,9 +86,10 @@ router.delete("/:id", async (req, res) => {
 router.post("/login", async (req, res) => {
   const findUser = await userModel
     .findOne({ username: req.body.username })
-    .select("+password");
-
+    // .select("password");
+console.log(findUser.password+"findUser")
   const check = await bcrypt.compare(req.body.password, findUser.password);
+  console.log("check " + check)
 
   if (!findUser || !check) {
     return res.status(401).send("Wrong password or username");
@@ -116,6 +103,7 @@ router.post("/login", async (req, res) => {
   req.session.user = findUser;
   res.send("Successful login");
 });
+
 
 router.get("/login", (req, res) => {
   if (!req.session.id) {
