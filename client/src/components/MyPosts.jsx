@@ -1,5 +1,5 @@
 import React from "react";
-import "./MyPosts.css";
+import "../style/MyPosts.css"
 import { FaGlasses } from "react-icons/fa";
 import { MdMenuBook } from "react-icons/md";
 import { MdPostAdd } from "react-icons/md";
@@ -8,9 +8,14 @@ import { MdMode } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Popup from "reactjs-popup";
+import { useContext } from "react";
+import { LogInContext } from "./LogInContext";
 
 function MyPosts() {
   const [bookData, setBookData] = useState([]);
+  const { isLoggedIn, setIsLoggedIn} = useContext(LogInContext);
+
+ 
 
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
@@ -53,6 +58,7 @@ function MyPosts() {
       },
     });
     const result = await response.json();
+    console.log(result);
     getAllBooks();
   }
 
@@ -70,7 +76,7 @@ function MyPosts() {
 
   useEffect(() => {
     getAllBooks();
-  }, [setBookData]);
+  }, [setBookData], [setIsLoggedIn(true)]);
 
   function deleteBook(book) {
     bookData.splice(book, 1);
@@ -83,6 +89,7 @@ function MyPosts() {
       method: "DELETE",
     });
     const result = await response.json();
+    console.log(result);
     getAllBooks();
   }
 
@@ -90,8 +97,13 @@ function MyPosts() {
     <div className="container">
       <div className="heading">
         <div>
+        <Link
+            to={"/feed"}
+            style={{ textDecoration: "none", color: "black" }}
+          >
           <MdMenuBook size={30} color="#87204D" />
           <p>Go to feed</p>
+          </Link>
         </div>
         <div>
           <FaGlasses size={40} color="#87204D" />

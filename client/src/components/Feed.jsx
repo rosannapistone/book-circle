@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
-import "./Feed.css";
+import "../style/Feed.css";
+import { Link } from "react-router-dom";
+import { FaGlasses } from "react-icons/fa";
+import { MdMenuBook } from "react-icons/md";
+import { MdPostAdd } from "react-icons/md";
 
 export default function Feed() {
   const [bookData, setBookData] = useState([]);
@@ -21,10 +25,34 @@ export default function Feed() {
 
   useEffect(() => {
     getAllBooks();
-  }, []); 
+  }/* , [] */); 
 
   return (
     <div className="container">
+       <div className="heading">
+        <div>
+        <Link
+            to={"/feed"}
+            style={{ textDecoration: "none", color: "black" }}
+          >
+          <FaGlasses size={30} color="#87204D" />
+          <p>My posts</p>
+          </Link>
+        </div>
+        <div>
+          <MdMenuBook size={40} color="#87204D" />
+          <h3>Feed</h3>
+        </div>
+        <div>
+          <Link
+            to={"/createpost"}
+            style={{ textDecoration: "none", color: "black" }}
+          >
+            <MdPostAdd size={30} color="#87204D" />
+            <p>Create new post</p>
+          </Link>
+        </div>
+      </div>
       <div className="posts">
         {bookData.map((item) => {
           return (

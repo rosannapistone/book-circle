@@ -8,7 +8,7 @@ import usersRouter from "./routes/user.js";
 import cookieSession from "cookie-session";
 
 mongoose.connect(
-  "mongodb://localhost:27017/BookCircles",
+  "mongodb://localhost/bookCircles",
   { useNewUrlParser: true },
   (err) => {
     if (err) {
@@ -33,7 +33,7 @@ app.use(
     httpOnly: true,
     secure: false,
   })
-);
+); 
 
 // Routes for users
 app.use("/users", usersRouter);
