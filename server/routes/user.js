@@ -7,14 +7,11 @@ const router = express.Router();
 
 //Test Rosanna
 router.get("/", (req, res) => {
-  userModel.find()//.populate('user') // for att fa tag pa user pa clientsidan, hamta user.name typ
+  userModel
+    .find() //.populate('user') // for att fa tag pa user pa clientsidan, hamta user.name typ
     .then((users) => res.json(users))
     .catch((err) => res.status(400).json("Error: " + err));
 });
-
-
-
-
 
 router.get("/", async (req, res) => {
   try {
@@ -26,34 +23,36 @@ router.get("/", async (req, res) => {
   }
 });
 
-
 router.post("/createAccount", async (req, res) => {
   const cryptedPassword = await bcrypt.hash(req.body.password, 10);
-    
-     const username = req.body.username;
-     const password = req.body.password;
-     const mail = req.body.mail;
-     const isAdmin = req.body.isAdmin;
 
-     
-     const user = new userModel({ username:username, password:cryptedPassword, mail, isAdmin});
-     
+  const username = req.body.username;
+  const password = req.body.password;
+  const mail = req.body.mail;
+  const isAdmin = req.body.isAdmin;
 
-    const checkUsername = await userModel.findOne({username: req.body.username})
-    if(checkUsername){
-      res.status(409)
-      .send("username already exist! chose another one.")
-      return
-    } else if(!checkUsername){
-       await user.save()
-    .then(()=> res.json(user))
-    // .catch(error => res.send("invalid user name or username already exist"))
-    .catch((err) => res.status(400).json("Error: " + err));
-    console.log(user+ " USER ADDED")
-    }
+  const user = new userModel({
+    username: username,
+    password: cryptedPassword,
+    mail,
+    isAdmin,
+  });
 
+  const checkUsername = await userModel.findOne({
+    username: req.body.username,
+  });
+  if (checkUsername) {
+    res.status(409).send("username already exist! chose another one.");
+    return;
+  } else if (!checkUsername) {
+    await user
+      .save()
+      .then(() => res.json(user))
+      // .catch(error => res.send("invalid user name or username already exist"))
+      .catch((err) => res.status(400).json("Error: " + err));
+    console.log(user + " USER ADDED");
+  }
 });
-
 
 router.get("/:id", (req, res) => {
   const { id } = req.params;
@@ -66,7 +65,6 @@ router.get("/:id", (req, res) => {
     return res.send(findUser);
   }
 });
-
 
 router.delete("/:id", async (req, res) => {
   try {
@@ -84,12 +82,11 @@ router.delete("/:id", async (req, res) => {
 });
 
 router.post("/login", async (req, res) => {
-  const findUser = await userModel
-    .findOne({ username: req.body.username })
-    // .select("password");
-console.log(findUser.password+"findUser")
+  const findUser = await userModel.findOne({ username: req.body.username });
+  // .select("password");
+  console.log(findUser.password + "findUser");
   const check = await bcrypt.compare(req.body.password, findUser.password);
-  console.log("check " + check)
+  console.log("check " + check);
 
   if (!findUser || !check) {
     return res.status(401).send("Wrong password or username");
@@ -101,9 +98,8 @@ console.log(findUser.password+"findUser")
   }
 
   req.session.user = findUser;
-  res.send("Successful login");
+  res.json(findUser);
 });
-
 
 router.get("/login", (req, res) => {
   if (!req.session.id) {
