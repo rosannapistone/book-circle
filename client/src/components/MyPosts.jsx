@@ -13,6 +13,7 @@ import { LogInContext } from "./LogInContext";
 
 function MyPosts() {
   const [bookData, setBookData] = useState([]);
+  const [userBookData, setUserBookData] = useState([])
   const { isLoggedIn, setIsLoggedIn} = useContext(LogInContext);
 
  
@@ -63,15 +64,17 @@ function MyPosts() {
   }
 
   async function getAllBooks() {
-    const response = await fetch("/books", {
+    const response = await fetch("/books/getownbooks", {
       method: "GET",
-      //body: JSON.stringify(data),
+      body: JSON.stringify(),
       headers: {
         "Content-Type": "application/json",
       },
     });
     const result = await response.json();
-    setBookData(result);
+    setUserBookData(result)
+    //setBookData(result);
+    console.log(result)
   }
 
   useEffect(() => {

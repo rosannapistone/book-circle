@@ -50,7 +50,7 @@ function CreatePost() {
     });
     const result = await response.json();
     console.log(result);
-    navigate("/");
+    navigate("/feed");
   }
 
   return (

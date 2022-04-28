@@ -27,6 +27,7 @@ app.use(cors({ credentials: true, origin: ["http://localhost:3000"] }));
 
 app.use(
   cookieSession({
+    name: "session",
     secret: "aVeryS3cr3tk3y",
     maxAge: 1000 * 100,
     sameSite: "strict",

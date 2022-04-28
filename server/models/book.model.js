@@ -2,19 +2,15 @@ import mongoose from "mongoose"
 
 const bookSchema = new mongoose.Schema(
   {
-   /*  userId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-    }, */
-    userId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-    },
-    username: String,
     title: String,
     author: String,
     description: String,
-    review: String
+    review: String,
+    
+    "userID": [{type: mongoose.Schema.Types.ObjectId, strictPopulate: false, ref: "user"}]
+     
+    //username: String,
+    
 
   });
 
