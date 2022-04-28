@@ -19,8 +19,10 @@ export default function Feed() {
       },
     });
     const result = await response.json();
+    //console.log(result)
     setBookData(result);
-    console.log(bookData);
+    //console.log(bookData);
+
   }
 
   useEffect(() => {
@@ -32,7 +34,7 @@ export default function Feed() {
        <div className="heading">
         <div>
         <Link
-            to={"/feed"}
+            to={"/myposts"}
             style={{ textDecoration: "none", color: "black" }}
           >
           <FaGlasses size={30} color="#87204D" />
@@ -66,7 +68,7 @@ export default function Feed() {
                   {item.description}
                 </p>
                 <p>
-                  Username's review {item.user}
+                  Username's review {/* {item.userID.username} */}
                   <br></br>
                   {item.review}
                 </p>
