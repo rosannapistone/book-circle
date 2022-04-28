@@ -6,7 +6,7 @@ POST http://localhost:3001/users/createAccount
 Content-Type: application/json
 
 {   
-    "username": "esty245",
+    "username": "esty24599",
     "mail": "nomail.se",
     "password": "secret",
     "isAdmin": false
@@ -26,3 +26,15 @@ Content-Type: application/json
 ###
 
 DELETE http://localhost:3001/users/62614a84599cc910d4a6efa3
+
+###
+
+POST http://localhost:3001/users/login
+Content-Type: application/json
+
+{   
+    "username": "esty24599",
+    "password": "secret"
+}
+
+###
