@@ -3,14 +3,17 @@ import "../style/Login.css";
 //import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { LogInContext } from "./LogInContext";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
+  const navigate = useNavigate()
 
   const { isLoggedIn, setIsLoggedIn} = useContext(LogInContext);
 
   function handleLogIn() {
     setIsLoggedIn(true)
     console.log(isLoggedIn) //function fungerar ej.
+    navigate("/feed")
   }
 
   return (
