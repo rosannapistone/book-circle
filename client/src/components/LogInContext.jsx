@@ -22,23 +22,6 @@ const LogInContextProvider = ({ children }) => {
     }
   };
 
-  const logout = async (user) => {
-    console.log(user);
-    try {
-      const status = await fetch("users/logout", {
-        method: "Get",
-        body: JSON.stringify(user),
-        headers: { "Content-Type": "application/json" },
-      });
-
-      const result = await status.json();
-      setLoggedInUser(result);
-      return false;
-    } catch (err) {
-      return true;
-    }
-  };
-
   console.log(loggedInUser);
   return (
     <LogInContext.Provider

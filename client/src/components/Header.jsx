@@ -5,21 +5,36 @@ import { LogInContext } from "./LogInContext";
 
 export default function Header() {
   const navigate = useNavigate();
-  const { loggedInUser, setLoggedInUser } = useContext(LogInContext);
   const [logoutUser, setLogoutUser] = useState(false);
+  const { loggedInUser, setLoggedInUser } = useContext(LogInContext);
+
   console.log(loggedInUser);
 
-  async function handleLogOut(data) {
-    let status = await logoutUser(data);
-    if (!status) {
-      setLogoutUser(true);
-    } else {
-      navigate("/");
+  const handleLogOut = async (user) => {
+    console.log(user);
+    try {
+      const status = await fetch("users/logout", {
+        method: "DELETE",
+        body: JSON.stringify(user),
+        headers: { "Content-Type": "application/json" },
+      });
+
+      const result = await status.json();
+      setLogoutUser(result);
+      return true;
+    } catch (err) {
+      return false;
     }
-    // if (loggedInUser) {
-    //   setLoggedInUser();
-    // }
-  }
+  };
+
+  // async function handleLogOut(data) {
+  //   let status = await logoutUser(data);
+  //   if (!status) {
+  //     setLogoutUser(true);
+  //   } else {
+  //     navigate("/");
+  //   }
+  // }
 
   // const { isLoggedIn, setIsLoggedIn} = useContext(LogInContext);
 
@@ -92,7 +107,15 @@ export default function Header() {
                 {loggedInUser.username}
               </b>
             </p>
-            {/* <button style={{margin: "0rem"}} onClick={() => {handleLogOut()}}>Log out</button> */}
+
+            <button
+              style={{ margin: "0rem" }}
+              onClick={() => {
+                handleLogOut();
+              }}
+            >
+              Log out
+            </button>
           </div>
         </>
       )}
