@@ -104,9 +104,15 @@ if (!findUser) {
   if (req.session.user) {
     return res.send("Already logged in");
   }
+ 
+   
   req.session.user = findUser;
   res.json(findUser);
 });
+
+   
+
+
 
 router.get("/login", (req, res) => {
   if (!req.session.id) {

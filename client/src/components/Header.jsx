@@ -2,19 +2,28 @@ import { Link } from "react-router-dom";
 import Logo from "../assets/logo.png";
 import { useContext } from "react";
 import { LogInContext } from "./LogInContext";
-
+import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
 
 export default function Header() {
-
-  const {loggedInUser, setLoggedInUser} = useContext(LogInContext);
+const navigate = useNavigate();
+  const {loggedInUser, setLoggedInUser,logout} = useContext(LogInContext);
  console.log(loggedInUser)
- /*  const  handleLogOut = () => {
-    if (loggedInUser){
-    setLoggedInUser()
-    }
-  } */
 
- // const { isLoggedIn, setIsLoggedIn} = useContext(LogInContext);
+
+
+
+  const  handleLogOut = () => {
+    if (loggedInUser){
+    logout()
+    
+    }else if (!loggedInUser){
+     console.log("error")
+    }
+  } 
+
+
+ //const { isLoggedIn, setIsLoggedIn} = useContext(LogInContext);
 
   //const [activeUser, setActiveUser] = useState("")
 
@@ -71,7 +80,7 @@ export default function Header() {
        <div style={{ display: "flex", marginRight: "2rem", marginTop: "1.5rem", alignItems: "center", flexDirection: "column"}}>
        <p style={{margin: "0rem", marginBottom: ".5rem"}}>Logged in as <b style={{color: "#87204d", fontWeight: "bold"}}>{loggedInUser.username}</b>
       </p>
-      {/* <button style={{margin: "0rem"}} onClick={() => {handleLogOut()}}>Log out</button> */}
+       <button style={{margin: "0rem"}} onClick={() => {handleLogOut()}}>Log out</button> 
       </div>
       </>
       }
