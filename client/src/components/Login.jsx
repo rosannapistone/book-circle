@@ -3,6 +3,7 @@ import "../style/Login.css";
 import { useContext } from "react";
 import { LogInContext } from "./LogInContext";
 import { useNavigate } from "react-router-dom";
+import { FaLongArrowAltRight } from "react-icons/fa";
 
 function Login() {
   const navigate = useNavigate();
@@ -65,10 +66,21 @@ function Login() {
 
           <div className="loginPlaceHolder">
             <h2>Login or Continue Offline</h2>
+            <a href="/offline">
+              <button id="exploreOffline">
+                Explore Offline
+                <FaLongArrowAltRight
+                  size={19}
+                  style={{ marginBottom: "-5px" }}
+                />
+              </button>
+            </a>
             <div className="InputHolder">
               <label htmlFor="userName">Username</label>
               <input name="userName" onChange={handleUsernameChange}></input>
-              <p style={{color: "red", fontSize: ".8rem"}}>{failedLogin ? "Wrong username or password" : undefined}</p>
+              <p style={{ color: "red", fontSize: ".8rem" }}>
+                {failedLogin ? "Wrong username or password" : undefined}
+              </p>
             </div>
             <div className="InputHolder">
               <label htmlFor="passWord">Password</label>
@@ -76,7 +88,9 @@ function Login() {
                 name="passWord"
                 onChange={handleLogInPasswordChange}
               ></input>
-              <p style={{color: "red", fontSize: ".8rem"}}>{failedLogin ? "Wrong username or password" : undefined}</p>
+              <p style={{ color: "red", fontSize: ".8rem" }}>
+                {failedLogin ? "Wrong username or password" : undefined}
+              </p>
             </div>
             <div className="logInButtonPlaceHolder">
               <button
