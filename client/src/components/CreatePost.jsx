@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "../style/CreatePost.css";
 import { FaGlasses } from "react-icons/fa";
 import { MdMenuBook } from "react-icons/md";
 import { MdPostAdd } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { LogInContext } from "./LogInContext";
 
 function CreatePost() {
   const navigate = useNavigate();
+  const {loggedInUser, setLoggedInUser} = useContext(LogInContext);
 
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
@@ -31,11 +33,11 @@ function CreatePost() {
   };
 
   const onSubmit = () => {
-    postNewBook(title, author, description, review);
+    postNewBook(title, author, description, review, loggedInUser);
   };
 
-  function postNewBook(title, author, description, review) {
-    const data = { title, author, description, review };
+  function postNewBook(title, author, description, review, loggedInUser) {
+    const data = { title, author, description, review, loggedInUser};
     console.log(data);
     postNewData(data);
   }
@@ -49,7 +51,7 @@ function CreatePost() {
       },
     });
     const result = await response.json();
-    console.log(result);
+    console.log(result, data);
     navigate("/feed");
   }
 

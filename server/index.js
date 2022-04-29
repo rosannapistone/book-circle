@@ -6,6 +6,7 @@ import cors from "cors";
 import booksRouter from "./routes/books.js";
 import usersRouter from "./routes/user.js";
 import cookieSession from "cookie-session";
+import session from "express-session"
 
  mongoose.connect(
    "mongodb://localhost/bookCircles",
@@ -25,7 +26,7 @@ app.use("/", express.static("public"));
 
 app.use(cors({ credentials: true, origin: ["http://localhost:3000"] }));
 
- app.use(
+   app.use(
   cookieSession({
     name: "session",
     secret: "aVeryS3cr3tk3y",
@@ -34,7 +35,14 @@ app.use(cors({ credentials: true, origin: ["http://localhost:3000"] }));
     httpOnly: true,
     secure: false,
   })
-);  
+);   
+
+/* app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: true }
+})) */
 
 // Routes for users
 app.use("/users", usersRouter);

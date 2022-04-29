@@ -14,7 +14,7 @@ import { LogInContext } from "./LogInContext";
 function MyPosts() {
   //const [bookData, setBookData] = useState([]);
   const [userBookData, setUserBookData] = useState([]);
-  const { isLoggedIn, setIsLoggedIn } = useContext(LogInContext);
+  //const { isLoggedIn, setIsLoggedIn } = useContext(LogInContext);
 
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
@@ -73,6 +73,7 @@ function MyPosts() {
     const result = await response.json();
     setUserBookData(result);
     console.log(result);
+    console.log(userBookData)
   }
 
   // Calls the GET method to display all
@@ -81,8 +82,8 @@ function MyPosts() {
     () => {
       getAllBooks();
     },
-    [setUserBookData],
-    [setIsLoggedIn(true)]
+    [],
+    /* [setIsLoggedIn(true)] */
   );
 
   //DELETE post
@@ -203,7 +204,7 @@ function MyPosts() {
                   {item.description}
                 </p>
                 <p>
-                  Username's review
+                  Username's review {/* {loggedInUser.username} */}
                   <br></br>
                   {item.review}
                 </p>
