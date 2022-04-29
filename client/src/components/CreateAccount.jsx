@@ -45,7 +45,7 @@ function CreateAccount() {
         // .then(response => {this._router.navigate(['/mainpage'])})
         // .catch((err)=>{alert(err)})
         .catch((error) => {
-          if (error === 404) {
+          if (error = 409 || 404 || 11000) {
             alert("USERNAME ALREADY EXIST");
           } else {
             alert(error);
