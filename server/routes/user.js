@@ -83,6 +83,7 @@ router.delete("/:id", (req, res) => {
 });
 
 
+
 router.post("/login", async (req, res) => {
   console.log(req.body.username);
   const findUser = await userModel.findOne({ username: req.body.username });
@@ -114,5 +115,17 @@ router.get("/login", (req, res) => {
 
   res.send(req.session);
 });
+
+
+router.delete("/logout", (req, res) => {
+ if (req.session.user){
+  req.session = null;
+  res.status(200).send("Your are now logged out! hope to see you soon!");
+ }else if (!req.session.user) {
+     return res.status(404).send("you have to login to logout");
+   }
+   res.send("other error")
+});
+
 
 export default router;
