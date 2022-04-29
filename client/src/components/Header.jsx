@@ -6,14 +6,23 @@ import { useEffect } from "react";
 
 
 export default function Header() {
-  const { isLoggedIn, setIsLoggedIn} = useContext(LogInContext);
 
-  const [activeUser, setActiveUser] = useState("")
+  const {loggedInUser, setLoggedInUser} = useContext(LogInContext);
+ console.log(loggedInUser)
+ /*  const  handleLogOut = () => {
+    if (loggedInUser){
+    setLoggedInUser()
+    }
+  } */
+
+ // const { isLoggedIn, setIsLoggedIn} = useContext(LogInContext);
+
+  //const [activeUser, setActiveUser] = useState("")
 
   //vill hämta users för att skriva ut den som är
   //inloggad i headerns conditional rendering
   //"Logged in as <username>"
-  async function getAllUsers() {
+ /*  async function getAllUsers() {
     const response = await fetch("/users", {
       method: "GET",
       //body: JSON.stringify(data),
@@ -28,7 +37,7 @@ export default function Header() {
 
   useEffect(() => {
     getAllUsers();
-  }, []); 
+  }, []);  */
   
 
   return (
@@ -46,7 +55,7 @@ export default function Header() {
         style={{ display: "flex", height: "5rem", margin: "1rem" }}
       />
       </Link>
-      {!isLoggedIn? 
+      {!loggedInUser? 
       <>
       <div style={{ display: "flex", marginRight: "2rem" }}>
        <Link to={'/'} style={{textDecoration: "none", color: "black"}}>
@@ -59,11 +68,13 @@ export default function Header() {
       </div>
       </>
       :
-      
       <>
-      
+       <div style={{ display: "flex", marginRight: "2rem", marginTop: "1.5rem", alignItems: "center", flexDirection: "column"}}>
+       <p style={{margin: "0rem", marginBottom: ".5rem"}}>Logged in as <b style={{color: "#87204d", fontWeight: "bold"}}>{loggedInUser.username}</b>
+      </p>
+      {/* <button style={{margin: "0rem"}} onClick={() => {handleLogOut()}}>Log out</button> */}
+      </div>
       </>
-   
       }
     </header>
   );

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "../style/Login.css";
-//import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { LogInContext } from "./LogInContext";
 import { useNavigate } from "react-router-dom";
@@ -12,7 +11,6 @@ function Login() {
 
   let [logInUsername, setLogInUsername] = useState("");
   let [logInPassword, setLogInPassword] = useState("");
-  //const navigate = useNavigate()
 
   const handleUsernameChange = (event) => {
     setLogInUsername(event.target.value);
@@ -32,25 +30,20 @@ function Login() {
     } else {
       navigate("/feed");
     }
-
-    // console.log(login); //function fungerar ej.
-    // /* navigate("/feed"); */
   }
 
   const HandleSubmit = () => {
     let user = {
-      logInUsername,
-      logInPassword,
+      username: logInUsername,
+      password: logInPassword,
     };
     console.log(user);
-    console.log(failedLogin);
     handleLogIn(user);
   };
 
   return (
     <>
       <div>
-        <h1>{failedLogin ? "FEL UPPGIFTER" : undefined}</h1>
         <h1>Welcome To The Book Circle!</h1>
         <p>
           Get inspired and browse thousands of book reviews, contribute, add and
@@ -75,6 +68,7 @@ function Login() {
             <div className="InputHolder">
               <label htmlFor="userName">Username</label>
               <input name="userName" onChange={handleUsernameChange}></input>
+              <p style={{color: "red", fontSize: ".8rem"}}>{failedLogin ? "Wrong username or password" : undefined}</p>
             </div>
             <div className="InputHolder">
               <label htmlFor="passWord">Password</label>
@@ -82,13 +76,9 @@ function Login() {
                 name="passWord"
                 onChange={handleLogInPasswordChange}
               ></input>
+              <p style={{color: "red", fontSize: ".8rem"}}>{failedLogin ? "Wrong username or password" : undefined}</p>
             </div>
             <div className="logInButtonPlaceHolder">
-              {/*   <p>
-                  Forgot Login details?
-                  <p style={{ color: "red" }}>click here</p>
-                </p> */}
-              {/* <Link to={'/feed'}> */}
               <button
                 onClick={() => {
                   HandleSubmit();
@@ -96,7 +86,6 @@ function Login() {
               >
                 Log in
               </button>
-              {/* </Link> */}
             </div>
           </div>
         </div>

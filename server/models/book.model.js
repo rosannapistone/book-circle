@@ -6,8 +6,22 @@ const bookSchema = new mongoose.Schema(
     author: String,
     description: String,
     review: String,
+
+    /* username: {
+      type: String
+    }, */
+    loggedInUser: {
+      username: String
+      /* type: mongoose.Schema.Types.ObjectId,
+      ref: "user" */
+    }
+
+   /*  userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "user"
+    } */
     
-    "userID": [{type: mongoose.Schema.Types.ObjectId, strictPopulate: false, ref: "user"}]
+    //user: {type: mongoose.Schema.Types.ObjectId, strictPopulate: false, ref: "user", required: true}
      
     //username: String,
     

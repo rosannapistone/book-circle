@@ -6,12 +6,11 @@ import bcrypt from "bcrypt";
 const router = express.Router();
 
 //Test Rosanna
-router.get("/", (req, res) => {
-  userModel
-    .find() //.populate('user') // for att fa tag pa user pa clientsidan, hamta user.name typ
+/* router.get("/", (req, res) => {
+  userModel.find()//.populate('user') // for att fa tag pa user pa clientsidan, hamta user.name typ
     .then((users) => res.json(users))
     .catch((err) => res.status(400).json("Error: " + err));
-});
+}); */
 
 router.get("/", async (req, res) => {
   try {
@@ -27,7 +26,7 @@ router.post("/createAccount", async (req, res) => {
   const cryptedPassword = await bcrypt.hash(req.body.password, 10);
 
   const username = req.body.username;
-  const password = req.body.password;
+  //const password = req.body.password;
   const mail = req.body.mail;
   const isAdmin = req.body.isAdmin;
 
@@ -82,27 +81,34 @@ router.delete("/:id", async (req, res) => {
 });
 
 router.post("/login", async (req, res) => {
+  console.log(req.body.username);
   const findUser = await userModel.findOne({ username: req.body.username });
+
+if (!findUser) {
+  return res.status(401).send("Wrong password or username");
+}
+
   // .select("password");
-  console.log(findUser.password + "findUser");
+  // console.log(findUser.password + "findUser");
   const check = await bcrypt.compare(req.body.password, findUser.password);
   console.log("check " + check);
-
+  
   if (!findUser || !check) {
     return res.status(401).send("Wrong password or username");
   }
+  
 
   // Check if user aleady is logged in
   if (req.session.user) {
     return res.send("Already logged in");
   }
-
   req.session.user = findUser;
   res.json(findUser);
 });
 
 router.get("/login", (req, res) => {
   if (!req.session.id) {
+    //console.log('user:', req.session.id)
     return res.status(401).send("You are not logged in");
   }
 

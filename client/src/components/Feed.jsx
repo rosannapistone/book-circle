@@ -21,13 +21,13 @@ export default function Feed() {
     const result = await response.json();
     //console.log(result)
     setBookData(result);
-    //console.log(bookData);
+    console.log(result);
 
   }
 
   useEffect(() => {
     getAllBooks();
-  }/* , [] */); 
+},[]); 
 
   return (
     <div className="container">
@@ -68,7 +68,7 @@ export default function Feed() {
                   {item.description}
                 </p>
                 <p>
-                  Username's review {/* {item.userID.username} */}
+                  Username's review {item.username}
                   <br></br>
                   {item.review}
                 </p>

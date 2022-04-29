@@ -6,14 +6,15 @@ const LogInContextProvider = ({ children }) => {
   const [loggedInUser, setLoggedInUser] = useState();
 
   const login = async (user) => {
+    console.log(user)
     try {
-      let status = await fetch("users/login", {
+      const status = await fetch("users/login", {
         method: "POST",
         body: JSON.stringify(user),
         headers: { "Content-Type": "application/json" },
       });
 
-      let result = await status.json();
+      const result = await status.json();
       setLoggedInUser(result);
       return true;
     } catch (err) {
