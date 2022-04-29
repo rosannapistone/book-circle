@@ -8,6 +8,15 @@
 
 }
 
+#exploreOffline{
+    background-color: #87204D;
+    padding:8px;
+    border-radius:2px;
+    border:none;
+    color:white;
+    align-self: flex-end;
+}
+
 .LogInCreateAccountBox{
     margin: auto;
     max-width: 800px;
