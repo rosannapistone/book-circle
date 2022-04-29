@@ -157,13 +157,15 @@ function Admin() {
               style={{
                 backgroundColor: "#ede8ea",
                 display: "flex",
-                justifyContent: "space-between",
+                flexDirection: "column",
+                alignItems: "center",
                 padding: "1rem",
+                flexWrap: "wrap"
               }}
             >
               <div>
                 <p>Username: {user.username}</p>
-                <p>Id: {user._id}</p>
+                <p style={{fontSize: ".5rem"}}>Id: {user._id}</p>
                 <p>Role: {user.role}</p>
                 
               </div>
@@ -179,11 +181,12 @@ function Admin() {
                       <MdMode />
                     </a>
                   }
-                  position="bottom right"
+                  position="bottom center"
+                  
                 >
-                  <div className="popup-div">
+                  <div className="popup-div" style={{width: "80%"}}>
                     <form
-                      className="formContainer"
+                      className="formContainer" 
                       onSubmit={(e) => e.preventDefault()}
                     >
                       <div className="form">
@@ -217,10 +220,11 @@ function Admin() {
                       padding: "1rem",
                       display: "flex",
                       justifyContent: "space-between",
+                      flexWrap: "wrap"
                     }}
                   >
+                    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", flexWrap: "wrap"}}>
                     <p>Post:</p>
-                    <div style={{ display: "flex", flexDirection: "column" }}>
                       <p>Title: {book.title}</p>
                       <p>Author: {book.author}</p>
                       <p>Description: {book.description}</p>
@@ -238,9 +242,9 @@ function Admin() {
                             <MdMode />
                           </a>
                         }
-                        position="bottom right"
+                        position="bottom center"
                       >
-                        <div className="popup-div">
+                        <div className="popup-div" style={{width: "80%"}}>
                           <form
                             className="formContainer"
                             onSubmit={(e) => e.preventDefault()}

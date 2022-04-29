@@ -9,7 +9,7 @@ import cookieSession from "cookie-session";
 import session from "express-session"
 
  mongoose.connect(
-   "mongodb://localhost/BookCircles",
+   "mongodb://localhost/bookCircles",
    { useNewUrlParser: true },
    (err) => {
      if (err) {
