@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "../App.css";
+import Admin from "./Admin";
 import Header from "./Header";
 import Login from "./Login";
 import Feed from "./Feed";
@@ -16,6 +17,7 @@ function App() {
       <BrowserRouter>
         <Header />
         <Routes>
+          <Route path="/admin" element={<Admin />} />
           <Route path="/feed" element={<Feed />} />
           <Route path="/" element={<Login />}></Route>
           <Route path="/offline" element={<OfflineFeed />}></Route>

@@ -5,6 +5,8 @@
 The students are going to create a platform where the user gets the ability to register, be able to log in and create content. What kind of content is optional but it should be based on one resource in the Express-API. The password that the user will type in, should be encrypted. All content that are created, changed or removed must be stored in MongoDB database. <br>
 The content that one user create is only allowed to change or remove by the creator. The platform should have a clientsite where all operations that have been mentioned before be workable. And also the content should be in one way visable for everyone - even if you are not logged in. <br>
 
+To use the Admin features, create a user with username admin, you'll then be navigated to the admin page where you can edit all users and posts. If you want to make another user to admin, just change their username to admin.
+
 ### Our application
 
 Our application is called "The book circle". It is a place where book nerds can gather and share there latest books and reviews. Here the user can create account and log in. There the user can add, remove or change the books. <br> <br>
