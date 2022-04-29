@@ -65,21 +65,6 @@ router.get("/:id", (req, res) => {
   }
 });
 
-router.delete("/:id", async (req, res) => {
-  try {
-    const { id } = req.params;
-    const removedUser = await userModel.findByIdAndRemove(id);
-    if (!removedUser) {
-      res.send("Id does not exist!");
-      return;
-    }
-    res.send("User is now removed");
-    // res.json(removedUser);
-  } catch (err) {
-    res.send("Other error...");
-  }
-});
-
 router.post("/login", async (req, res) => {
   console.log(req.body.username);
   const findUser = await userModel.findOne({ username: req.body.username });
@@ -114,6 +99,17 @@ router.get("/login", (req, res) => {
 
   res.send(req.session);
 });
+
+router.delete("/logout", (req, res) => {
+ if (req.session.user){
+  req.session = null;
+  res.status(200).send("Your are now logged out! hope to see you soon!");
+ }else if (!req.session.user) {
+     return res.status(404).send("you have to login to logout");
+   }
+   res.send("other error")
+});
+
 
 export default router;
 
