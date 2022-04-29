@@ -1,10 +1,7 @@
 import React, { useState } from "react";
 import "../style/CreateAccount.css";
-//import { useNavigate } from "react-router-dom";
 
 function CreateAccount() {
-  //const navigate = useNavigate();
-
   let [username, setUsername] = useState("");
   let [password, setPassword] = useState("");
   let [mail, setEmail] = useState("");
@@ -34,24 +31,20 @@ function CreateAccount() {
         "Content-Type": "application/json",
       },
     });
-    // navigate("/myposts");
-    return (
-      getUsers
-        .json()
-        // .then(alert("account created! return to homepage to sign in"))
-        .then((getUsers) => {
-          alert("account created, return to homepage to log in");
-        })
-        // .then(response => {this._router.navigate(['/mainpage'])})
-        // .catch((err)=>{alert(err)})
-        .catch((error) => {
-          if (error = 409 || 404 || 11000) {
-            alert("USERNAME ALREADY EXIST");
-          } else {
-            alert(error);
-          }
-        })
-    );
+
+    return getUsers
+      .json()
+      .then((getUsers) => {
+        alert("account created, return to homepage to log in");
+      })
+
+      .catch((error) => {
+        if ((error = 409 || 404 || 11000)) {
+          alert("USERNAME ALREADY EXIST");
+        } else {
+          alert(error);
+        }
+      });
   }
 
   const HandleSubmit = () => {
@@ -95,25 +88,3 @@ function CreateAccount() {
 }
 
 export default CreateAccount;
-
-// function HandleSubmit (e){
-//   e.preventDefault();
-//   let inputFields = document.getElementsByTagName("input");
-
-//   let username = inputFields[0].value
-//   let mail = inputFields[1].value
-//   let password = inputFields[2].value
-//   let isAdmin = false
-
-//   let newuser = {
-//     username,
-//     mail,
-//     password,
-//     isAdmin
-//   }
-//   console.log(newuser)
-//   POSTuser(newuser);
-//   setTimeout(()=>{
-//     getUser();
-//   },1500)
-// }

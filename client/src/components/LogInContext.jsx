@@ -1,14 +1,12 @@
 import { createContext, useState } from "react";
-//import { Navigate, useNavigate } from "react-router-dom";
 
 export const LogInContext = createContext();
-//const navigate = useNavigate()
 
 const LogInContextProvider = ({ children }) => {
   const [loggedInUser, setLoggedInUser] = useState();
 
   const login = async (user) => {
-    console.log(user)
+    console.log(user);
     try {
       const status = await fetch("users/login", {
         method: "POST",
@@ -25,18 +23,12 @@ const LogInContextProvider = ({ children }) => {
   };
 
   const logout = async () => {
-      const response = await fetch("/users/logout/", {
-        method: "DELETE",
-      })
-      const result = await response.json();
-      console.log(result)
-      setLoggedInUser()
-      //navigate("/offline")
-    //   setLoggedInUser(result);
-    //   return true;
-    // } catch (err) {
-    //   return false;
-    // }
+    const response = await fetch("/users/logout/", {
+      method: "DELETE",
+    });
+    const result = await response.json();
+    console.log(result);
+    setLoggedInUser();
   };
 
   console.log(loggedInUser);
@@ -45,7 +37,7 @@ const LogInContextProvider = ({ children }) => {
       value={{
         loggedInUser,
         login,
-        logout
+        logout,
       }}
     >
       {children}
