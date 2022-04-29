@@ -1,12 +1,10 @@
 import mongoose from "mongoose";
-import userModel from "./models/user.model.js";
 import "./connect.js";
 import express from "express";
 import cors from "cors";
 import booksRouter from "./routes/books.js";
 import usersRouter from "./routes/user.js";
 import cookieSession from "cookie-session";
-import session from "express-session"
 
  mongoose.connect(
    "mongodb://localhost/bookCircles",
@@ -36,13 +34,6 @@ app.use(cors({ credentials: true, origin: ["http://localhost:3000"] }));
     secure: false,
   })
 );   
-
-/* app.use(session({
-  secret: 'keyboard cat',
-  resave: false,
-  saveUninitialized: true,
-  cookie: { secure: true }
-})) */
 
 // Routes for users
 app.use("/users", usersRouter);

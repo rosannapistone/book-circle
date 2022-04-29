@@ -1,6 +1,8 @@
 import { createContext, useState } from "react";
+//import { Navigate, useNavigate } from "react-router-dom";
 
 export const LogInContext = createContext();
+//const navigate = useNavigate()
 
 const LogInContextProvider = ({ children }) => {
   const [loggedInUser, setLoggedInUser] = useState();
@@ -28,6 +30,8 @@ const LogInContextProvider = ({ children }) => {
       })
       const result = await response.json();
       console.log(result)
+      setLoggedInUser()
+      //navigate("/offline")
     //   setLoggedInUser(result);
     //   return true;
     // } catch (err) {

@@ -15,10 +15,9 @@ const navigate = useNavigate();
 
   const  handleLogOut = () => {
     if (loggedInUser){
-    logout()
-    
+      logout()
     }else if (!loggedInUser){
-     console.log("error")
+      console.log("error")
     }
   } 
 
@@ -80,7 +79,9 @@ const navigate = useNavigate();
        <div style={{ display: "flex", marginRight: "2rem", marginTop: "1.5rem", alignItems: "center", flexDirection: "column"}}>
        <p style={{margin: "0rem", marginBottom: ".5rem"}}>Logged in as <b style={{color: "#87204d", fontWeight: "bold"}}>{loggedInUser.username}</b>
       </p>
+      <Link to={'/'}>
        <button style={{margin: "0rem"}} onClick={() => {handleLogOut()}}>Log out</button> 
+       </Link>
       </div>
       </>
       }
