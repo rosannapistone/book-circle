@@ -22,12 +22,26 @@ const LogInContextProvider = ({ children }) => {
     }
   };
 
+  const logout = async () => {
+      const response = await fetch("/users/logout/", {
+        method: "DELETE",
+      })
+      const result = await response.json();
+      console.log(result)
+    //   setLoggedInUser(result);
+    //   return true;
+    // } catch (err) {
+    //   return false;
+    // }
+  };
+
   console.log(loggedInUser);
   return (
     <LogInContext.Provider
       value={{
         loggedInUser,
         login,
+        logout
       }}
     >
       {children}
