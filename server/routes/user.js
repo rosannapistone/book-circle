@@ -5,12 +5,13 @@ import bcrypt from "bcrypt";
 
 const router = express.Router();
 
-//Test Rosanna
-/* router.get("/", (req, res) => {
-  userModel.find()//.populate('user') // for att fa tag pa user pa clientsidan, hamta user.name typ
+//GET all users
+router.get("/all", (req, res) => {
+  userModel.find()
     .then((users) => res.json(users))
     .catch((err) => res.status(400).json("Error: " + err));
-}); */
+});
+
 
 router.get("/", async (req, res) => {
   try {
@@ -26,15 +27,14 @@ router.post("/createAccount", async (req, res) => {
   const cryptedPassword = await bcrypt.hash(req.body.password, 10);
 
   const username = req.body.username;
-  //const password = req.body.password;
   const mail = req.body.mail;
-  const isAdmin = req.body.isAdmin;
+  const role = req.body.role;
 
   const user = new userModel({
     username: username,
     password: cryptedPassword,
     mail,
-    isAdmin,
+    role: role,
   });
 
   const checkUsername = await userModel.findOne({
@@ -47,7 +47,6 @@ router.post("/createAccount", async (req, res) => {
     await user
       .save()
       .then(() => res.json(user))
-      // .catch(error => res.send("invalid user name or username already exist"))
       .catch((err) => res.status(400).json("Error: " + err));
     console.log(user + " USER ADDED");
   }
@@ -65,6 +64,26 @@ router.get("/:id", (req, res) => {
   }
 });
 
+
+//PUT user by id
+router.put("/:id", (req, res) => {
+  userModel.findOneAndUpdate(
+    { _id: req.params.id },
+    { username: req.body.username, role: req.body.role }
+  )
+    .then(() => res.json("User updated!"))
+    .catch((err) => res.status(400).json("Error: " + err));
+});
+
+//DELETE user by id
+router.delete("/:id", (req, res) => {
+  userModel.findByIdAndDelete({ _id: req.params.id })
+    .then(() => res.json("User Deleted"))
+    .catch((err) => res.status(400).json("Error: " + err));
+});
+
+
+
 router.post("/login", async (req, res) => {
   console.log(req.body.username);
   const findUser = await userModel.findOne({ username: req.body.username });
@@ -73,8 +92,6 @@ if (!findUser) {
   return res.status(401).send("Wrong password or username");
 }
 
-  // .select("password");
-  // console.log(findUser.password + "findUser");
   const check = await bcrypt.compare(req.body.password, findUser.password);
   console.log("check " + check);
   
@@ -93,12 +110,12 @@ if (!findUser) {
 
 router.get("/login", (req, res) => {
   if (!req.session.id) {
-    //console.log('user:', req.session.id)
     return res.status(401).send("You are not logged in");
   }
 
   res.send(req.session);
 });
+
 
 router.delete("/logout", (req, res) => {
  if (req.session.user){
@@ -112,61 +129,3 @@ router.delete("/logout", (req, res) => {
 
 
 export default router;
-
-// Get all users
-/* router.get("/", (req, res) => {
-  if (!req.session.username) {
-    return res.status(401).json("You are not authorized, log in!");
-  }
-  userModel
-    .find()
-    .then((users) => res.json(users))
-    .catch((err) => res.status(400).json("Error: " + err));
-}); */
-
-/* router.get("/authenticate", (req, res) => {
-  if (!req.session.username) {
-    res.status(401).json("You are not authorized, log in!");
-  } else {
-    res.status(200).json("You're logged in");
-  }
-}); */
-
-// Add a new user
-/* router.post("/add", async (req, res) => {
-  const username = req.body.username; */
-//const password = await bcrypt.hash(req.body.password, 10); //bcrypt?
-
-/*   const newUser = new userModel({ username, password });
-
-  newUser
-    .save()
-    .then(() => res.json(password), "User created")
-    .catch((err) => res.status(400).json("Error: " + err));
-}); */
-
-// attempt to login a user
-/* router.post("/login", async (req, res) => { */
-// Check if username & password is correct
-/*  userModel.findOne({ username: req.body.username }, function (err, user) {
-    logInUser(user);
-  }); */
-
-/* async function logInUser(user) { */
-// Check if username & password is correct
-/* if (!user || !(await bcrypt.compare(req.body.password, user.password))) {
-      return res.status(401).json("Wrong username or password");
-    } */
-// Check if user is already logged in
-/* if (req.session.username) {
-      return res.status(422).json("You are already logged in");
-    } */
-
-// Create session
-/*   req.session.username = user.username;
-    req.session.userId = user._id; */
-
-// Send a response
-/* res.send("Successfull login");
-  } */
-/* }); */

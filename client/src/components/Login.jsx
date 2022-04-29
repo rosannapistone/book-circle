@@ -30,6 +30,10 @@ function Login() {
     } else {
       navigate("/feed");
     }
+console.log(loggedInUser)
+    if (logInUsername === 'admin'){
+      navigate('/admin')
+    }
   }
 
   const HandleSubmit = () => {
