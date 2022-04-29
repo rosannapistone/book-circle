@@ -1,8 +1,7 @@
 import { Link } from "react-router-dom";
 import Logo from "../assets/logo.png";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { LogInContext } from "./LogInContext";
-import { useEffect } from "react";
 
 
 export default function Header() {

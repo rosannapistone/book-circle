@@ -8,21 +8,16 @@ import { MdPostAdd } from "react-icons/md";
 export default function Feed() {
   const [bookData, setBookData] = useState([]);
 
-  //window.addEventListener('load', getAllBooks())
-
   async function getAllBooks() {
     const response = await fetch("/books", {
       method: "GET",
-      //body: JSON.stringify(data),
       headers: {
         "Content-Type": "application/json",
       },
     });
     const result = await response.json();
-    //console.log(result)
     setBookData(result);
     console.log(result);
-
   }
 
   useEffect(() => {
@@ -68,7 +63,7 @@ export default function Feed() {
                   {item.description}
                 </p>
                 <p>
-                  Username's review {item.username}
+                  <b style={{fontWeight: "bold",color: "#87204d" }}>{item.user?.username}</b>'s review
                   <br></br>
                   {item.review}
                 </p>

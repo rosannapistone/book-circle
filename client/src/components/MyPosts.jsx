@@ -8,13 +8,9 @@ import { MdMode } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Popup from "reactjs-popup";
-import { useContext } from "react";
-import { LogInContext } from "./LogInContext";
 
 function MyPosts() {
-  //const [bookData, setBookData] = useState([]);
   const [userBookData, setUserBookData] = useState([]);
-  //const { isLoggedIn, setIsLoggedIn } = useContext(LogInContext);
 
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
@@ -73,7 +69,6 @@ function MyPosts() {
     const result = await response.json();
     setUserBookData(result);
     console.log(result);
-    console.log(userBookData)
   }
 
   // Calls the GET method to display all
@@ -83,7 +78,6 @@ function MyPosts() {
       getAllBooks();
     },
     [],
-    /* [setIsLoggedIn(true)] */
   );
 
   //DELETE post
@@ -204,7 +198,7 @@ function MyPosts() {
                   {item.description}
                 </p>
                 <p>
-                  Username's review {/* {loggedInUser.username} */}
+                  <b style={{fontWeight: "bold",color: "#87204d" }}>{item.user?.username}</b>'s review
                   <br></br>
                   {item.review}
                 </p>
