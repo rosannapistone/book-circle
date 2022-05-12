@@ -19,7 +19,7 @@ router.get("/", async (req, res) => {
     res.json(users);
   } catch (err) {
     console.log(err);
-    res.send("Other error...");
+    res.json("Other error...");
   }
 });
 
@@ -41,7 +41,7 @@ router.post("/createAccount", async (req, res) => {
     username: req.body.username,
   });
   if (checkUsername) {
-    res.status(409).send("username already exist! chose another one.");
+    res.status(409).json("username already exist! chose another one.");
     return;
   } else if (!checkUsername) {
     await user
@@ -57,10 +57,10 @@ router.get("/:id", (req, res) => {
   const findUser = users.find((user) => user.id === id);
 
   if (findUser === undefined) {
-    return res.status(404).send("Not found!");
+    return res.status(404).json("Not found!");
   }
   if (findUser) {
-    return res.send(findUser);
+    return res.json(findUser);
   }
 });
 
@@ -89,22 +89,15 @@ router.post("/login", async (req, res) => {
   const findUser = await userModel.findOne({ username: req.body.username });
 
 if (!findUser) {
-  return res.status(401).send("Wrong password or username");
+  return res.status(401).json("Wrong password or username");
 }
 
   const check = await bcrypt.compare(req.body.password, findUser.password);
   console.log("check " + check);
   
   if (!findUser || !check) {
-    return res.status(401).send("Wrong password or username");
+    return res.status(401).json("Wrong password or username");
   }
-  
-
-  // Check if user aleady is logged in
-  if (req.session.user) {
-    return res.send("Already logged in");
-  }
- 
    
   req.session.user = findUser;
   res.json(findUser);
@@ -116,21 +109,21 @@ if (!findUser) {
 
 router.get("/login", (req, res) => {
   if (!req.session.id) {
-    return res.status(401).send("You are not logged in");
+    return res.status(401).json("You are not logged in");
   }
 
-  res.send(req.session);
+  res.json(req.session);
 });
 
 
 router.delete("/logout", (req, res) => {
  if (req.session.user){
   req.session = null;
-  res.status(200).send("Your are now logged out! hope to see you soon!");
+  res.status(200).json("Your are now logged out! hope to see you soon!");
  }else if (!req.session.user) {
-     return res.status(404).send("you have to login to logout");
+     return res.status(404).json("you have to login to logout");
    }
-   res.send("other error")
+   res.json("other error")
 });
 
 

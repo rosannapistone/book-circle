@@ -4,20 +4,20 @@ GET http://localhost:3001/books
 ###
 
 // GET my own posts 
-GET http://localhost:3001/books/getownbooks
+GET http://localhost:3001/books/getownbooks/627b5fee209401eb0daef6f3
 
 ###
 
 // GET one specific post 
-GET http://localhost:3001/books/id
+GET http://localhost:3001/books/626be5f46d69c00ce5bf283f
 
 ###
 
 // Create a post 
-POST http://localhost:3001/books/add 
+POST http://localhost:3001/books/add
 Content-Type: application/json
 
-{
+{   
 "title": "Harry Potter and the Goblet of Fire", 
 "author": "J.K. Rowling",
 "description": "This is the fourth novel in the Harry Potter series. It follows
@@ -32,18 +32,18 @@ Content-Type: application/json
 ###
 
 // UPDATE a specific post 
-PUT http://localhost:3001/books/62669a652e7cb5b51bebc63c
+PUT http://localhost:3001/books/626be5f46d69c00ce5bf283f
 Content-Type: application/json
 
 {
 "title": "Pippi", 
 "author": "Astrid",
-"description": "Start tjej",
+"description": "Stark tjej",
 "review": "Ball"
 }
 
 ###
 
 // DELETE a specific post 
-DELETE http://localhost:3001/books/62669a652e7cb5b51bebc63c
+DELETE http://localhost:3001/books/626b99b402edb7a4f3eb2f18
 Content-Type: application/json

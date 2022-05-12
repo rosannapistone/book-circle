@@ -1,31 +1,30 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState,React } from "react";
 import "../style/OfflineFeed.css";
 
 export default function OfflineFeed() {
-  const [bookData, setBookData] = useState([]);
+  const [bookDataOffline, setBookDataOffline] = useState([]);
 
   async function getAllBooks() {
-    const response = await fetch("/books", {
+    const response = await fetch("/books/offline", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
     });
     const result = await response.json();
-    setBookData(result);
-    console.log(bookData);
+    console.log(result);
+    setBookDataOffline(result);
+    console.log(bookDataOffline) 
   }
 
-  useEffect(
-    () => {
-      getAllBooks();
-    } /* , [] */
-  );
+  useEffect(() => {
+    getAllBooks();
+},[]); 
 
   return (
     <div className="container">
       <div className="posts">
-        {bookData.map((item) => {
+        {bookDataOffline.map((item) => {
           return (
             <div key={item.id} className="postContainer">
               <div className="textContainer">
@@ -37,7 +36,7 @@ export default function OfflineFeed() {
                   {item.description}
                 </p>
                 <p>
-                  Username's review {item.user}
+                  Users review 
                   <br></br>
                   {item.review}
                 </p>

@@ -30,8 +30,8 @@ POST http://localhost:3001/users/login
 Content-Type: application/json
 
 {   
-    "username": "esty24599",
-    "password": "secret"
+    "username": "i",
+    "password": "i"
 }
 
 ###
