@@ -9,33 +9,18 @@ function Login() {
   const navigate = useNavigate();
   const { loggedInUser, login } = useContext(LogInContext);
   const [failedLogin, setFailedLogin] = useState(false);
+  console.log(loggedInUser)
 
   let [logInUsername, setLogInUsername] = useState("");
   let [logInPassword, setLogInPassword] = useState("");
 
   const handleUsernameChange = (event) => {
     setLogInUsername(event.target.value);
-    console.log(setLogInUsername);
   };
 
   const handleLogInPasswordChange = (event) => {
     setLogInPassword(event.target.value);
-    console.log(setLogInPassword);
   };
-
-  async function handleLogIn(data) {
-    let status = await login(data);
-
-    if (!status) {
-      setFailedLogin(true);
-    } else {
-      navigate("/feed");
-    }
-console.log(loggedInUser)
-    if (logInUsername === 'admin'){
-      navigate('/admin')
-    }
-  }
 
   const HandleSubmit = () => {
     let user = {
@@ -45,6 +30,26 @@ console.log(loggedInUser)
     console.log(user);
     handleLogIn(user);
   };
+
+  const context = useContext(LogInContext)
+
+  async function handleLogIn(data) {
+    let status = await login(data);
+    
+    if (!status) {
+      setFailedLogin(true);
+      console.log(status)
+    } else {
+      navigate("/feed");
+      console.log(status)
+    }
+     if (logInUsername === 'admin'){
+      navigate('/admin')
+    } 
+  }
+  console.log(loggedInUser)
+
+  
 
   return (
     <>
