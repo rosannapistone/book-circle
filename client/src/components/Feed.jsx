@@ -52,8 +52,9 @@ export default function Feed() {
       </div>
       <div className="posts">
         {bookData.map((item) => {
+          console.log(item._id)
           return (
-            <div key={item.id} className="postContainer">
+            <div key={item._id} className="postContainer">
               <div className="textContainer">
                 <p className="title">{item.title}</p>
                 <p className="author">{item.author}</p>

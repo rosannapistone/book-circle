@@ -241,7 +241,7 @@ function Admin() {
             
                 return (
                   <div
-                  key={book.id}
+                  key={book._id}
                     style={{
                       border: "solid black 2px",
                       padding: "1rem",

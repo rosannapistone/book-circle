@@ -33,7 +33,7 @@ export default function Header() {
         />
       </Link>
       
-      {!loggedInUser ? (
+      { !loggedInUser || loggedInUser === 'Wrong password or username' ? (
         <>
           <div style={{ display: "flex", marginRight: "2rem" }}>
             <Link to={"/"} style={{ textDecoration: "none", color: "black" }}>

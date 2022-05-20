@@ -8,7 +8,7 @@ const LogInContextProvider = ({ children }) => {
 
 
   async function login(user) {
-    console.log(user)
+    console.log('user', user)
     try {
       const response = await fetch("users/login", {
         method: "POST",
@@ -19,6 +19,7 @@ const LogInContextProvider = ({ children }) => {
       });
       const result = await response.json();
       setLoggedInUser(result);
+      console.log('result', result)
       setRole(result.isAdmin)
       return result;
     } catch (err) {

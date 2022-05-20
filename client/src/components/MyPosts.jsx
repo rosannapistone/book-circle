@@ -123,7 +123,7 @@ function MyPosts() {
       <div className="myPosts">
         {userBookData.map((item) => {
           return (
-            <div key={item.id} className="postContainer">
+            <div key={item._id} className="postContainer">
               <div className="edit">
                 <FaTrashAlt
                   onClick={() => {

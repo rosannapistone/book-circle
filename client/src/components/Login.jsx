@@ -30,13 +30,14 @@ function Login() {
     handleLogIn(user);
   };
 
-  async function handleLogIn(data) {
-    const user = await login(data);
-//måste trycka 2 ggr för att logga in som admin
+  async function handleLogIn(user) {
+    const existingUser = await login(user);
+    console.log('user in login.js', existingUser)
 
 
-   if (user && !loggedInUser) {
-      setFailedLogin(false);
+   if (existingUser === 'Wrong password or username') {
+      setFailedLogin(true);
+      console.log(failedLogin)
     } else {
       user.isAdmin ? navigate("/admin") : navigate("/feed");
     } 
