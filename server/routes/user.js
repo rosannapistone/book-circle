@@ -28,14 +28,15 @@ router.post("/createAccount", async (req, res) => {
 
   const username = req.body.username;
   const mail = req.body.mail;
-  const role = req.body.role;
+  const isAdmin = req.body.isAdmin;
 
   const user = new userModel({
     username: username,
     password: cryptedPassword,
     mail,
-    role: role,
+    isAdmin: isAdmin,
   });
+  console.log('rad 39:', isAdmin)
 
   const checkUsername = await userModel.findOne({
     username: req.body.username,
@@ -69,7 +70,7 @@ router.get("/:id", (req, res) => {
 router.put("/:id", (req, res) => {
   userModel.findOneAndUpdate(
     { _id: req.params.id },
-    { username: req.body.username, role: req.body.role }
+    { username: req.body.username, isAdmin: req.body.isAdmin }
   )
     .then(() => res.json("User updated!"))
     .catch((err) => res.status(400).json("Error: " + err));
@@ -83,9 +84,7 @@ router.delete("/:id", (req, res) => {
 });
 
 
-
 router.post("/login", async (req, res) => {
-  console.log(req.body.username);
   const findUser = await userModel.findOne({ username: req.body.username });
 
 if (!findUser) {
@@ -103,15 +102,11 @@ if (!findUser) {
   res.json(findUser);
 });
 
-   
-
-
 
 router.get("/login", (req, res) => {
   if (!req.session.id) {
     return res.status(401).json("You are not logged in");
   }
-
   res.json(req.session);
 });
 

@@ -7,9 +7,9 @@ import { FaLongArrowAltRight } from "react-icons/fa";
 
 function Login() {
   const navigate = useNavigate();
-  const { loggedInUser, login } = useContext(LogInContext);
+  const { login, role, loggedInUser } =
+    useContext(LogInContext);
   const [failedLogin, setFailedLogin] = useState(false);
-  console.log(loggedInUser)
 
   let [logInUsername, setLogInUsername] = useState("");
   let [logInPassword, setLogInPassword] = useState("");
@@ -27,29 +27,20 @@ function Login() {
       username: logInUsername,
       password: logInPassword,
     };
-    console.log(user);
     handleLogIn(user);
   };
 
-  const context = useContext(LogInContext)
-
   async function handleLogIn(data) {
-    let status = await login(data);
-    
-    if (!status) {
-      setFailedLogin(true);
-      console.log(status)
+    const user = await login(data);
+//måste trycka 2 ggr för att logga in som admin
+
+
+   if (user && !loggedInUser) {
+      setFailedLogin(false);
     } else {
-      navigate("/feed");
-      console.log(status)
-    }
-     if (logInUsername === 'admin'){
-      navigate('/admin')
+      user.isAdmin ? navigate("/admin") : navigate("/feed");
     } 
   }
-  console.log(loggedInUser)
-
-  
 
   return (
     <>

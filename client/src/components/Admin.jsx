@@ -144,13 +144,37 @@ function Admin() {
   }, []);
 
 
+  function handleRoleChange(user) {
+    postEditedRole(user, !user.isAdmin);
+  }
+
+  //PUT role
+  async function postEditedRole(user, isAdmin) {
+    
+    const response = await fetch(`/users/${user._id}`, {
+      method: "PUT",
+      body: JSON.stringify({
+        ...user,
+        isAdmin
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const result = await response.json();
+    console.log(result);
+    getAllUsers();
+  }  
+
+
+
   return (
     <div>
       <div style={{ fontSize: "2rem" }}>Admin</div>
       {allUsers.map((user) => {
-          if (user.username === 'admin') {
+          if (user.isAdmin === true) {
               user.role = 'Admin'
-          } else {user.role = 'User'}console.log(user.role)
+          } else {user.role = 'User'}
         return (
           <div key={user.id} style={{ margin: "4rem" }}>
             <div
@@ -167,6 +191,7 @@ function Admin() {
                 <p>Username: {user.username}</p>
                 <p style={{fontSize: ".5rem"}}>Id: {user._id}</p>
                 <p>Role: {user.role}</p>
+                <p style={{color: "grey"}} onClick={() => {handleRoleChange(user)}}>Change role</p>
                 
               </div>
               <div className="edit">
@@ -211,7 +236,9 @@ function Admin() {
               </div>
             </div>
             {bookData.map((book) => {
+            
               if (book.user._id === user._id)
+            
                 return (
                   <div
                   key={book.id}

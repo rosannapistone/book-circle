@@ -70,7 +70,8 @@ router.put("/:id", async (req, res) => {
   }
 
   const book = await bookModel.findById(req.params.id)
-  if (book.user !== req.session.user && ! req.session.user.isAdmin) {
+  console.log(book, req.session.user)
+  if (book.user.toString() !== req.session.user._id && ! req.session.user.isAdmin) {
     return res.status(403).json('You are only allowed to edit your own book')
   }
   
@@ -90,8 +91,7 @@ router.delete("/:id", async (req, res) => {
   } 
 
    const book = await bookModel.findById({ _id: req.params.id})
-  if (book.user !== req.session.user /* && !req.session.user.isAdmin */) {
-    console.log(book.user, req.session.user)
+  if (book.user.toString() !== req.session.user._id && !req.session.user.isAdmin) {
     return res.status(403).json('You are only allowed to delete your own book')
   }  
 

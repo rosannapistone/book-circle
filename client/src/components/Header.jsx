@@ -2,13 +2,12 @@ import { Link } from "react-router-dom";
 import Logo from "../assets/logo.png";
 import { useContext } from "react";
 import { LogInContext } from "./LogInContext";
-import { useNavigate } from "react-router-dom";
-import React, { useState } from "react";
+import React from "react";
+import {MdAdminPanelSettings} from "react-icons/md";
+import { FaGlasses } from "react-icons/fa";
 
 export default function Header() {
-  const navigate = useNavigate();
-  const { loggedInUser, setLoggedInUser, logout } = useContext(LogInContext);
-  console.log(loggedInUser);
+  const { loggedInUser, logout } = useContext(LogInContext);
 
   const handleLogOut = () => {
     if (loggedInUser) {
@@ -33,6 +32,7 @@ export default function Header() {
           style={{ display: "flex", height: "5rem", margin: "1rem" }}
         />
       </Link>
+      
       {!loggedInUser ? (
         <>
           <div style={{ display: "flex", marginRight: "2rem" }}>
@@ -50,6 +50,19 @@ export default function Header() {
         </>
       ) : (
         <>
+        {loggedInUser.isAdmin ? (
+          <>
+          <Link to={"/admin"}>
+        <MdAdminPanelSettings size={30} color="#87204D"/>
+        </Link>
+        <Link to={"/feed"}>
+        <FaGlasses size={30} color="#87204D"/>
+        </Link>
+        </>
+        ) : (
+        <></>
+        )}
+        
           <div
             style={{
               display: "flex",

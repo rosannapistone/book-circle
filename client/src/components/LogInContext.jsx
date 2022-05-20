@@ -4,9 +4,10 @@ export const LogInContext = createContext();
 
 const LogInContextProvider = ({ children }) => {
   const [loggedInUser, setLoggedInUser] = useState();
+  const [role, setRole] = useState();
+
 
   async function login(user) {
-  //const login = async (user) => {
     console.log(user)
     try {
       const response = await fetch("users/login", {
@@ -18,12 +19,13 @@ const LogInContextProvider = ({ children }) => {
       });
       const result = await response.json();
       setLoggedInUser(result);
-      return true;
+      setRole(result.isAdmin)
+      return result;
     } catch (err) {
-      return false;
+      return null;
     }
   };
-  console.log(loggedInUser);
+  
 
   const logout = async () => {
     const response = await fetch("/users/logout/", {
@@ -39,6 +41,7 @@ const LogInContextProvider = ({ children }) => {
     <LogInContext.Provider
       value={{
         loggedInUser,
+        role,
         login,
         logout,
       }}
